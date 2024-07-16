@@ -15,6 +15,73 @@ return new class extends Migration
     {
         Schema::create('copropiedades', function (Blueprint $table) {
             $table->id();
+            $table->string('nit_copropiedad')->nullable();
+            $table->string('nombre_copropiedad')->nullable();
+            $table->enum('tipo_unidad', ['Apartamento', 'Casa', 'Local', 'Lote', 'Garaje', 'Bodega'])->nullable();
+            $table->string('torre_bloque')->nullable();
+            $table->string('n°')->nullable();
+            $table->string('matricula_inmobiliaria')->nullable();
+            $table->string('ficha_catastral')->nullable();
+            $table->string('area_mt_cuadrado')->nullable();
+            $table->string('coeficiente_participacion')->nullable();
+            $table->string('propietario1')->nullable();
+            $table->string('propietario2')->nullable();
+            $table->string('inmobiliaria')->nullable();
+            $table->string('arrendatario1')->nullable();
+            $table->string('arrendatario2')->nullable();
+            $table->string('placa_vehiculo')->nullable();
+            $table->string('profesion_oficio')->nullable();
+            //crear editar cuotas de administración
+            $table->date('fecha_inicio_cuotaOrdinaria')->nullable();
+            $table->date('fecha_final_cuotaOrdinaria')->nullable();
+            $table->decimal('expensa_total_cuotaOrdinaria', 10, 2)->nullable();
+            $table->decimal('incremento_expensas_mes_cuotaOrdinaria', 5, 2)->nullable();
+            $table->string('modo_aplicacion_cuotaOrdinaria')->nullable();
+            $table->date('fecha_inicio_ordinariaModular')->nullable();
+            $table->date('fecha_final_ordinariaModular')->nullable();
+            $table->decimal('expensa_total_ordinariaModular', 10, 2)->nullable();
+            $table->decimal('incremento_expensas_mes_ordinariaModular', 5, 2)->nullable();
+            $table->string('modo_aplicacion_ordinariaModular')->nullable();
+            $table->date('fecha_inicio_extraordinaria')->nullable();
+            $table->date('fecha_final_extraordinaria')->nullable();
+            $table->decimal('expensa_total_extraordinaria', 10, 2)->nullable();
+            $table->decimal('incremento_expensas_mes_extraordinaria', 5, 2)->nullable();
+            $table->string('modo_aplicacion_extraordinaria')->nullable();
+            $table->date('fecha_inicio_extraordinariaModular')->nullable();
+            $table->date('fecha_final_extraordinariaModular')->nullable();
+            $table->decimal('expensa_total_extraordinariaModular', 10, 2)->nullable();
+            $table->decimal('incremento_expensas_mes_extraordinariaModular', 5, 2)->nullable();
+            $table->string('modo_aplicacion_extraordinariaModular')->nullable();
+            //Unidades
+            $table->string('codigo_unidad1')->nullable();
+            $table->string('nombre_unidad1')->nullable();
+            $table->string('coeficiente_unidad1')->nullable();
+            $table->string('cuotaOrdinaria_unidad1')->nullable();
+            $table->string('ordinariaModular_unidad1')->nullable();
+            $table->string('extraordinaria_unidad1')->nullable();
+            $table->string('extraordinariaModular_unidad1')->nullable();
+            //Crear editar descuento pronto pago
+            $table->date('fechaInicio_descuentoOrdinaria')->nullable();
+            $table->date('fecha_final_descuentoOrdinaria')->nullable();
+            $table->string('descuento_porcentaje_ordinaria')->nullable();
+            $table->string('valor_fijo_ordinaria')->nullable();
+            $table->date('fechaInicio_descuentoOrdinariaModular')->nullable();
+            $table->date('fecha_final_descuentoOrdinariaModular')->nullable();
+            $table->string('descuento_porcentaje_ordinariaModular')->nullable();
+            $table->string('valor_fijo_ordinariaModular')->nullable();
+            //Crear editar retroactivos
+            $table->date('fechaInicio_retroactivoOrdinaria')->nullable();
+            $table->date('fechaFinal_retroactivoOrdinaria')->nullable();
+            $table->string('nombreUnidad1_retroactivoOrdinaria')->nullable();
+            $table->string('valorUnidad1_retroactivoOrdinaria')->nullable();
+            $table->date('fechaInicio_retroactivoOrdinariaModular')->nullable();
+            $table->date('fechaFinal_retroactivoOrdinariaModular')->nullable();
+            $table->string('nombreUnidad1_retroactivoOrdinariaModular')->nullable();
+            $table->string('valorUnidad1_retroactivoOrdinariaModular')->nullable();
+            //Crear editar consejeros
+            
+
+
             $table->timestamps();
         });
     }

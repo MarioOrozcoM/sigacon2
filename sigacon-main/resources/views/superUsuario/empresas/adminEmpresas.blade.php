@@ -43,11 +43,11 @@
             <!-- Iterar sobre la lista de usuarios -->
             @foreach($empresas as $empresa)
             <tr class="user-row">
-            <td class="border border-gray-400 px-4 py-2 user-name">
+            <td class="text-center border border-gray-400 px-4 py-2 user-name">
                 {{ $empresa->codigo_empresa }}
 
             </td>
-                <td class="border border-gray-400 px-4 py-2 nombre-comercial">{{ $empresa->nombre_comercial }}</td>
+                <td class="text-center border border-gray-400 px-4 py-2 nombre-comercial">{{ $empresa->nombre_comercial }}</td>
                 <td class="border border-gray-400 px-4 py-2 flex items-center justify-center">
                     <img src="{{ asset($empresa->logo) }}" alt="Logo de la empresa" class="h-16 w-auto">
                 </td>
