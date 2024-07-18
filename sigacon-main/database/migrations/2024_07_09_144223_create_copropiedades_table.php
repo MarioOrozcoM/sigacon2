@@ -79,8 +79,35 @@ return new class extends Migration
             $table->string('nombreUnidad1_retroactivoOrdinariaModular')->nullable();
             $table->string('valorUnidad1_retroactivoOrdinariaModular')->nullable();
             //Crear editar consejeros
-            
-
+            $table->date('fechaInicio_consejeroOrdinaria')->nullable();
+            $table->date('fechaFinal_consejeroOrdinaria')->nullable();
+            $table->string('descuentoOrdinaria_consejero')->nullable();
+            $table->string('valorFijo_consejeroOrdinaria')->nullable();
+            $table->string('nombreUnidad1_consejeroOrdinaria')->nullable();
+            $table->string('propietarioUnidad1_consejeroOrdinaria')->nullable();
+            $table->string('valorUnidad1_consejeroOrdinaria')->nullable();
+            $table->date('fechaInicio_consejeroOrdinariaModular')->nullable();
+            $table->date('fechaFinal_consejeroOrdinariaModular')->nullable();
+            $table->string('descuentoOrdinariaModular_consejero')->nullable();
+            $table->string('valorFijo_consejeroOrdinariaModular')->nullable();
+            $table->string('valorUnidad1_consejeroOrdinariaModular')->nullable();
+            //Crear editar conceptos de facturación
+            $table->date('fechaInicio_conceptoFacturación')->nullable();
+            $table->date('fechaFinal_conceptoFacturacion')->nullable();
+            $table->string('codigo_conceptoFacturacion')->nullable();
+            $table->enum('nombre_conceptoFacturacion', ['Todos los Conceptos', 'Cuota Ordinaria', 'Cuota Ordinaria Modular',
+            'Cuota ExtraOrdinaria', 'Cuota ExtraOrdinaria Modular', 'Intereses de Mora', 'Arriendo', 'Multas y Sanciones',
+            'Cuotas Especiales', 'Daños y Bienes', 'Uso zonas comunes', 'Descuento Pronto Pago', 'Descuento por consejero, cuota
+            ordinaria y modular', 'Retroactivo cuota ordinaria', 'Retroactivo cuota ordinaria modular', 'Impuesto IVA generado'])->nullable();
+            $table->string('valorFijo_conceptoFacturacion')->nullable();
+            $table->string('valorImpuesto_IVAGeneradoPorcentaje')->nullable();
+            $table->string('valorFijoImpuesto_IVAGenerado')->nullable();
+            $table->string('imputacionContable_Db')->nullable();
+            $table->string('imputacionContable_Cr')->nullable();
+            //Crear editar intereses de mora
+            $table->enum('aplicarA_conceptoFacturacion', ['Todos los conceptos', 'Periodo Aplicacion', 'Expensa total mes',
+            'Incremento expensas mes %', 'Modo aplicación', 'Suma total', 'Cuotas expensas', 'Descuento pronto pago'])->nullable();
+            $table->string('tasaMensual')->nullable();
 
             $table->timestamps();
         });
