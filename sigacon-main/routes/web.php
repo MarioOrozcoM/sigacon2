@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ExcelEmpresaController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\CopropiedadController;
+use App\Models\Copropiedad;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,3 +129,15 @@ Route::put('/empresas/{empresa}', [EmpresaController::class, 'update'])->name('e
 
 // Ruta para habilitar o inhabilitar una empresa
 Route::put('/empresas/{empresa}/toggle', [EmpresaController::class, 'toggle'])->name('empresas.toggle');
+
+// Rutas para mostrar la lista de copropiedades y crear una nueva copropiedad
+Route::get('/copropiedades', [CopropiedadController::class, 'index'])->name('copropiedades.index');
+Route::get('/copropiedades/create', [CopropiedadController::class, 'create'])->name('copropiedades.create');
+Route::post('/copropiedades', [CopropiedadController::class, 'store'])->name('copropiedades.store');
+
+// Rutas para mostrar el formulario de edición y actualizar una copropiedad
+Route::get('/copropiedades/{copropiedad}/edit', [CopropiedadController::class, 'edit'])->name('copropiedades.edit');
+Route::put('/copropiedades/{copropiedad}', [CopropiedadController::class, 'update'])->name('copropiedades.update');
+
+// Ruta para habilitar o inhabilitar una copropiedad
+Route::put('/copropiedades/{copropiedad}/toggle', [CopropiedadController::class, 'toggle'])->name('copropiedades.toggle');
