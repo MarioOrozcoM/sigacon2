@@ -13,6 +13,16 @@
 
 <h2 class="text-xl font-semibold text-center mt-4">Agregar Nueva Copropiedad</h2>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <!-- Inicio Formulario crear copropiedad -->
 <div class="container mx-auto px-4 mt-8 mb-6 mr-4 grid grid-cols-2 gap-4">
     <div class="w-3/4"> <!-- Columna izquierda -->
@@ -237,6 +247,142 @@
                 <div class="mb-4">
                     <label for="valor_fijo_ordinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Cuota Ordinaria Modular (Valor Fijo):</label>
                     <input type="text" id="valor_fijo_ordinariaModular" name="valor_fijo_ordinariaModular" value="{{ old('valor_fijo_ordinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <h2 class="text-xl font-semibold text-center mt-4 mb-4">Crear Retroactivos</h2>
+                <div class="mb-4">
+                    <label for="fechaInicio_retroactivoOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria (Fecha Inicio):</label>
+                    <input type="date" id="fechaInicio_retroactivoOrdinaria" name="fechaInicio_retroactivoOrdinaria" value="{{ old('fechaInicio_retroactivoOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="fechaFinal_retroactivoOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria (Fecha Final):</label>
+                    <input type="date" id="fechaFinal_retroactivoOrdinaria" name="fechaFinal_retroactivoOrdinaria" value="{{ old('fechaFinal_retroactivoOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="nombreUnidad1_retroactivoOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria (Nombre Unidad 1):</label>
+                    <input type="text" id="nombreUnidad1_retroactivoOrdinaria" name="nombreUnidad1_retroactivoOrdinaria" value="{{ old('nombreUnidad1_retroactivoOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorUnidad1_retroactivoOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria (Valor Unidad 1):</label>
+                    <input type="text" id="valorUnidad1_retroactivoOrdinaria" name="valorUnidad1_retroactivoOrdinaria" value="{{ old('valorUnidad1_retroactivoOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="fechaInicio_retroactivoOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria Modular (Fecha Inicio):</label>
+                    <input type="date" id="fechaInicio_retroactivoOrdinariaModular" name="fechaInicio_retroactivoOrdinariaModular" value="{{ old('fechaInicio_retroactivoOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="fechaFinal_retroactivoOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria Modular (Fecha Final):</label>
+                    <input type="date" id="fechaFinal_retroactivoOrdinariaModular" name="fechaFinal_retroactivoOrdinariaModular" value="{{ old('fechaFinal_retroactivoOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="nombreUnidad1_retroactivoOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria Modular (Nombre Unidad 1):</label>
+                    <input type="text" id="nombreUnidad1_retroactivoOrdinariaModular" name="nombreUnidad1_retroactivoOrdinariaModular" value="{{ old('nombreUnidad1_retroactivoOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorUnidad1_retroactivoOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Retroactivo Ordinaria Modular (Valor Unidad 1):</label>
+                    <input type="text" id="valorUnidad1_retroactivoOrdinariaModular" name="valorUnidad1_retroactivoOrdinariaModular" value="{{ old('valorUnidad1_retroactivoOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <h2 class="text-xl font-semibold text-center mt-4 mb-4">Crear Consejeros</h2>
+                <div class="mb-4">
+                    <label for="fechaInicio_consejeroOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria (Fecha Inicio):</label>
+                    <input type="date" id="fechaInicio_consejeroOrdinaria" name="fechaInicio_consejeroOrdinaria" value="{{ old('fechaInicio_consejeroOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="fechaFinal_consejeroOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria (Fecha Final):</label>
+                    <input type="date" id="fechaFinal_consejeroOrdinaria" name="fechaFinal_consejeroOrdinaria" value="{{ old('fechaFinal_consejeroOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="descuentoOrdinaria_consejero" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria (Descuento %):</label>
+                    <input type="text" id="descuentoOrdinaria_consejero" name="descuentoOrdinaria_consejero" value="{{ old('descuentoOrdinaria_consejero') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorFijo_consejeroOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria (Valor Fijo):</label>
+                    <input type="text" id="valorFijo_consejeroOrdinaria" name="valorFijo_consejeroOrdinaria" value="{{ old('valorFijo_consejeroOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="nombreUnidad1_consejeroOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria (Nombre Unidad 1):</label>
+                    <input type="text" id="nombreUnidad1_consejeroOrdinaria" name="nombreUnidad1_consejeroOrdinaria" value="{{ old('nombreUnidad1_consejeroOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="propietarioUnidad1_consejeroOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria (Propietario Unidad 1):</label>
+                    <input type="text" id="propietarioUnidad1_consejeroOrdinaria" name="propietarioUnidad1_consejeroOrdinaria" value="{{ old('propietarioUnidad1_consejeroOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorUnidad1_consejeroOrdinaria" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria (Valor Unidad 1):</label>
+                    <input type="text" id="valorUnidad1_consejeroOrdinaria" name="valorUnidad1_consejeroOrdinaria" value="{{ old('valorUnidad1_consejeroOrdinaria') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="fechaInicio_consejeroOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria Modular (Fecha Inicio):</label>
+                    <input type="date" id="fechaInicio_consejeroOrdinariaModular" name="fechaInicio_consejeroOrdinariaModular" value="{{ old('fechaInicio_consejeroOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="fechaFinal_consejeroOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria Modular (Fecha Final):</label>
+                    <input type="date" id="fechaFinal_consejeroOrdinariaModular" name="fechaFinal_consejeroOrdinariaModular" value="{{ old('fechaFinal_consejeroOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="descuentoOrdinariaModular_consejero" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria Modular (Descuento %):</label>
+                    <input type="text" id="descuentoOrdinariaModular_consejero" name="descuentoOrdinariaModular_consejero" value="{{ old('descuentoOrdinariaModular_consejero') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorFijo_consejeroOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria Modular (Valor Fijo):</label>
+                    <input type="text" id="valorFijo_consejeroOrdinariaModular" name="valorFijo_consejeroOrdinariaModular" value="{{ old('valorFijo_consejeroOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorUnidad1_consejeroOrdinariaModular" class="block text-gray-700 text-sm font-bold mb-2">Consejero Ordinaria Modular (Valor Unidad 1):</label>
+                    <input type="text" id="valorUnidad1_consejeroOrdinariaModular" name="valorUnidad1_consejeroOrdinariaModular" value="{{ old('valorUnidad1_consejeroOrdinariaModular') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <h2 class="text-xl font-semibold text-center mt-4 mb-4">Crear Conceptos de Facturación</h2>
+                <div class="mb-4">
+                    <label for="fechaInicio_conceptoFacturación" class="block text-gray-700 text-sm font-bold mb-2">Concepto Facturación (Fecha Inicio):</label>
+                    <input type="date" id="fechaInicio_conceptoFacturación" name="fechaInicio_conceptoFacturación" value="{{ old('fechaInicio_conceptoFacturación') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="fechaFinal_conceptoFacturacion" class="block text-gray-700 text-sm font-bold mb-2">Concepto Facturación (Fecha Final):</label>
+                    <input type="date" id="fechaFinal_conceptoFacturacion" name="fechaFinal_conceptoFacturacion" value="{{ old('fechaFinal_conceptoFacturacion') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="codigo_conceptoFacturacion" class="block text-gray-700 text-sm font-bold mb-2">Concepto Facturación (Código):</label>
+                    <input type="text" id="codigo_conceptoFacturacion" name="codigo_conceptoFacturacion" value="{{ old('codigo_conceptoFacturacion') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="nombre_conceptoFacturacion" class="block text-gray-700 text-sm font-bold mb-2">Concepto Facturación (Nombre):</label>
+                    <select name="nombre_conceptoFacturacion" id="nombre_conceptoFacturacion" class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                        @foreach($nombre_conceptosFacturacion as $nombre_conceptoFacturacion)
+                            <option value="{{ $nombre_conceptoFacturacion }}">{{ $nombre_conceptoFacturacion }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="valorFijo_conceptoFacturacion" class="block text-gray-700 text-sm font-bold mb-2">Concepto Facturación (Valor Fijo):</label>
+                    <input type="text" id="valorFijo_conceptoFacturacion" name="valorFijo_conceptoFacturacion" value="{{ old('valorFijo_conceptoFacturacion') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorImpuesto_IVAGeneradoPorcentaje" class="block text-gray-700 text-sm font-bold mb-2">Valor Impuesto (IVA Generado %):</label>
+                    <input type="text" id="valorImpuesto_IVAGeneradoPorcentaje" name="valorImpuesto_IVAGeneradoPorcentaje" value="{{ old('valorImpuesto_IVAGeneradoPorcentaje') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="valorFijoImpuesto_IVAGenerado" class="block text-gray-700 text-sm font-bold mb-2">Valor Fijo Impuesto (IVA Generado):</label>
+                    <input type="text" id="valorFijoImpuesto_IVAGenerado" name="valorFijoImpuesto_IVAGenerado" value="{{ old('valorFijoImpuesto_IVAGenerado') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="imputacionContable_Db" class="block text-gray-700 text-sm font-bold mb-2">Imputación Contable (Db):</label>
+                    <input type="text" id="imputacionContable_Db" name="imputacionContable_Db" value="{{ old('imputacionContable_Db') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="imputacionContable_Cr" class="block text-gray-700 text-sm font-bold mb-2">Imputación Contable (Cr):</label>
+                    <input type="text" id="imputacionContable_Cr" name="imputacionContable_Cr" value="{{ old('imputacionContable_Cr') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
+                <h2 class="text-xl font-semibold text-center mt-4 mb-4">Crear Intereses de mora</h2>
+                <div class="mb-4">
+                    <label for="aplicarA_conceptoFacturacion" class="block text-gray-700 text-sm font-bold mb-2">Concepto Facturación (Aplicar a):</label>
+                    <select name="aplicarA_conceptoFacturacion" id="aplicarA_conceptoFacturacion" class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                        @foreach($aplicarA_conceptosFacturacion as $aplicarA_conceptoFacturacion)
+                            <option value="{{ $aplicarA_conceptoFacturacion }}">{{ $aplicarA_conceptoFacturacion }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="tasaMensual" class="block text-gray-700 text-sm font-bold mb-2">Tasa Mensual %:</label>
+                    <input type="text" id="tasaMensual" name="tasaMensual" value="{{ old('tasaMensual') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
                 </div>
             
                 <!-- Botón para crear la copropiedad -->

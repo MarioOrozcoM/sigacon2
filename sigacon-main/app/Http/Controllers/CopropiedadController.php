@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Copropiedad;
+use Illuminate\Support\Facades\DB;
 
 class CopropiedadController extends Controller
 {
@@ -21,8 +22,7 @@ class CopropiedadController extends Controller
         {
     
             $tiposUnidad = ['Apartamento', 'Casa', 'Local', 'Lote', 'Garaje', 'Bodega'];
-            $nombre_conceptosFacturacion = [
-                'Todos los Conceptos', 'Cuota Ordinaria', 'Cuota Ordinaria Modular',
+            $nombre_conceptosFacturacion = ['Todos los Conceptos', 'Cuota Ordinaria', 'Cuota Ordinaria Modular',
                 'Cuota ExtraOrdinaria', 'Cuota ExtraOrdinaria Modular', 'Intereses de Mora', 'Arriendo', 'Multas y Sanciones',
                 'Cuotas Especiales', 'Daños y Bienes', 'Uso zonas comunes', 'Descuento Pronto Pago', 'Descuento por consejero, cuota
                 ordinaria y modular', 'Retroactivo cuota ordinaria', 'Retroactivo cuota ordinaria modular', 'Impuesto IVA generado'
@@ -113,19 +113,13 @@ class CopropiedadController extends Controller
         'fechaInicio_conceptoFacturación' => 'nullable|date',
         'fechaFinal_conceptoFacturacion' => 'nullable|date',
         'codigo_conceptoFacturacion' => 'nullable|string|max:50',
-        'nombre_conceptoFacturacion' => 'nullable|string|in:
-        Todos los Conceptos, Cuota Ordinaria, Cuota Ordinaria Modular,
-        Cuota ExtraOrdinaria, Cuota ExtraOrdinaria Modular, Intereses de Mora, Arriendo, Multas y Sanciones,
-        Cuotas Especiales, Daños y Bienes, Uso zonas comunes, Descuento Pronto Pago, Descuento por consejero, cuota
-        ordinaria y modular, Retroactivo cuota ordinaria, Retroactivo cuota ordinaria modular, Impuesto IVA generado'
-        ,
+        'nombre_conceptoFacturacion' => 'nullable|string|in:Todos los Conceptos,Cuota Ordinaria,Cuota Ordinaria Modular,Cuota ExtraOrdinaria,Cuota ExtraOrdinaria Modular,Intereses de Mora,Arriendo,Multas y Sanciones,Cuotas Especiales,Daños y Bienes,Uso zonas comunes,Descuento Pronto Pago,Descuento por consejero,cuota ordinaria y modular,Retroactivo cuota ordinaria,Retroactivo cuota ordinaria modular,Impuesto IVA generado',
         'valorFijo_conceptoFacturacion' => 'nullable|string|max:50',
         'valorImpuesto_IVAGeneradoPorcentaje' => 'nullable|string|max:50',
         'valorFijoImpuesto_IVAGenerado' => 'nullable|string|max:50',
         'imputacionContable_Db' => 'nullable|string|max:50',
         'imputacionContable_Cr' => 'nullable|string|max:50',
-        'aplicarA_conceptoFacturacion' => 'nullable|string|in:Todos los conceptos, Periodo Aplicacion, Expensa total mes,
-        Incremento expensas mes %, Modo aplicación, Suma total, Cuotas expensas, Descuento pronto pago',
+        'aplicarA_conceptoFacturacion' => 'nullable|string|in:Todos los conceptos,Periodo Aplicacion,Expensa total mes,Incremento expensas mes %,Modo aplicación,Suma total,Cuotas expensas,Descuento pronto pago',
         'tasaMensual' => 'nullable|string|max:50',
         ]);
 
@@ -214,10 +208,11 @@ class CopropiedadController extends Controller
             'tasaMensual' => $request->tasaMensual,
         ]);
 
-        
+                
 
         return redirect()->route('copropiedades.index')->with('success', 'Copropiedad creada correctamente.');
     }
+    
 
     //Función para editar la info de la copropiedad
     public function edit(Copropiedad $copropiedad)  

@@ -34,23 +34,23 @@ return new class extends Migration
             //crear editar cuotas de administración
             $table->date('fecha_inicio_cuotaOrdinaria')->nullable();
             $table->date('fecha_final_cuotaOrdinaria')->nullable();
-            $table->decimal('expensa_total_cuotaOrdinaria', 10, 2)->nullable();
-            $table->decimal('incremento_expensas_mes_cuotaOrdinaria', 5, 2)->nullable();
+            $table->decimal('expensa_total_cuotaOrdinaria')->nullable();
+            $table->decimal('incremento_expensas_mes_cuotaOrdinaria')->nullable();
             $table->string('modo_aplicacion_cuotaOrdinaria')->nullable();
             $table->date('fecha_inicio_ordinariaModular')->nullable();
             $table->date('fecha_final_ordinariaModular')->nullable();
-            $table->decimal('expensa_total_ordinariaModular', 10, 2)->nullable();
-            $table->decimal('incremento_expensas_mes_ordinariaModular', 5, 2)->nullable();
+            $table->decimal('expensa_total_ordinariaModular')->nullable();
+            $table->decimal('incremento_expensas_mes_ordinariaModular')->nullable();
             $table->string('modo_aplicacion_ordinariaModular')->nullable();
             $table->date('fecha_inicio_extraordinaria')->nullable();
             $table->date('fecha_final_extraordinaria')->nullable();
-            $table->decimal('expensa_total_extraordinaria', 10, 2)->nullable();
-            $table->decimal('incremento_expensas_mes_extraordinaria', 5, 2)->nullable();
+            $table->decimal('expensa_total_extraordinaria')->nullable();
+            $table->decimal('incremento_expensas_mes_extraordinaria')->nullable();
             $table->string('modo_aplicacion_extraordinaria')->nullable();
             $table->date('fecha_inicio_extraordinariaModular')->nullable();
             $table->date('fecha_final_extraordinariaModular')->nullable();
-            $table->decimal('expensa_total_extraordinariaModular', 10, 2)->nullable();
-            $table->decimal('incremento_expensas_mes_extraordinariaModular', 5, 2)->nullable();
+            $table->decimal('expensa_total_extraordinariaModular')->nullable();
+            $table->decimal('incremento_expensas_mes_extraordinariaModular')->nullable();
             $table->string('modo_aplicacion_extraordinariaModular')->nullable();
             //Unidades
             $table->string('codigo_unidad1')->nullable();
@@ -108,7 +108,7 @@ return new class extends Migration
             $table->enum('aplicarA_conceptoFacturacion', ['Todos los conceptos', 'Periodo Aplicacion', 'Expensa total mes',
             'Incremento expensas mes %', 'Modo aplicación', 'Suma total', 'Cuotas expensas', 'Descuento pronto pago'])->nullable();
             $table->string('tasaMensual')->nullable();
-
+            $table->boolean('active')->default(true); // Aquí agregamos la columna 'active'
             $table->timestamps();
         });
     }
