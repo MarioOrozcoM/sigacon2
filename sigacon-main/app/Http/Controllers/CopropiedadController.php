@@ -313,19 +313,13 @@ class CopropiedadController extends Controller
             'fechaInicio_conceptoFacturación' => 'nullable|date',
             'fechaFinal_conceptoFacturacion' => 'nullable|date',
             'codigo_conceptoFacturacion' => 'nullable|string|max:50',
-            'nombre_conceptoFacturacion' => 'nullable|string|in:
-            Todos los Conceptos, Cuota Ordinaria, Cuota Ordinaria Modular,
-            Cuota ExtraOrdinaria, Cuota ExtraOrdinaria Modular, Intereses de Mora, Arriendo, Multas y Sanciones,
-            Cuotas Especiales, Daños y Bienes, Uso zonas comunes, Descuento Pronto Pago, Descuento por consejero, cuota
-            ordinaria y modular, Retroactivo cuota ordinaria, Retroactivo cuota ordinaria modular, Impuesto IVA generado'
-            ,
+            'nombre_conceptoFacturacion' => 'nullable|string|in:Todos los Conceptos,Cuota Ordinaria,Cuota Ordinaria Modular,Cuota ExtraOrdinaria,Cuota ExtraOrdinaria Modular,Intereses de Mora,Arriendo,Multas y Sanciones,Cuotas Especiales,Daños y Bienes,Uso zonas comunes,Descuento Pronto Pago,Descuento por consejero,cuota ordinaria y modular,Retroactivo cuota ordinaria,Retroactivo cuota ordinaria modular,Impuesto IVA generado',
             'valorFijo_conceptoFacturacion' => 'nullable|string|max:50',
             'valorImpuesto_IVAGeneradoPorcentaje' => 'nullable|string|max:50',
             'valorFijoImpuesto_IVAGenerado' => 'nullable|string|max:50',
             'imputacionContable_Db' => 'nullable|string|max:50',
             'imputacionContable_Cr' => 'nullable|string|max:50',
-            'aplicarA_conceptoFacturacion' => 'nullable|string|in:Todos los conceptos, Periodo Aplicacion, Expensa total mes,
-            Incremento expensas mes %, Modo aplicación, Suma total, Cuotas expensas, Descuento pronto pago',
+            'aplicarA_conceptoFacturacion' => 'nullable|string|in:Todos los conceptos,Periodo Aplicacion,Expensa total mes,Incremento expensas mes %,Modo aplicación,Suma total,Cuotas expensas,Descuento pronto pago',
             'tasaMensual' => 'nullable|string|max:50',
         ]);
 
