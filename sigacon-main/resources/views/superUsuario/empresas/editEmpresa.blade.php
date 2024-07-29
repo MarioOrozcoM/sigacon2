@@ -46,6 +46,8 @@
                     <option value="0" {{ $empresa->persona_juridica == 0 ? 'selected' : '' }}>No</option>
                 </select>
         </div>
+
+        <div id="fields_to_disable"> <!-- Inicio div para ocultar campos -->
         <div class="mb-4">
                 <label for="primer_nombre" class="block text-gray-700 text-sm font-bold mb-2">Primer Nombre:</label>
                 <input type="text" id="primer_nombre" name="primer_nombre" value="{{ $empresa->primer_nombre }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
@@ -62,6 +64,8 @@
                 <label for="segundo_apellido" class="block text-gray-700 text-sm font-bold mb-2">Segundo Apellido:</label>
                 <input type="text" id="segundo_apellido" name="segundo_apellido" value="{{ $empresa->segundo_apellido }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
         </div>
+        </div> <!-- Fin div para ocultar campos -->
+
         <div class="mb-4">
                 <label for="razon_social" class="block text-gray-700 text-sm font-bold mb-2">Razón Social:</label>
                 <input type="text" id="razon_social" name="razon_social" value="{{ $empresa->razon_social }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
@@ -199,6 +203,28 @@
 
 </div>
 <!-- Fin Formulario editar Empresa -->
+
+
+<!-- JS para ocultar campos -->
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const personaJuridicaSelect = document.getElementById('persona_juridica');
+            const fieldsToDisable = document.getElementById('fields_to_disable').querySelectorAll('input');
+
+            function toggleFields() {
+                const isDisabled = personaJuridicaSelect.value === '1';
+                fieldsToDisable.forEach(field => {
+                    field.disabled = isDisabled;
+                });
+            }
+
+            // Inicializa el estado de los campos según el valor inicial
+            toggleFields();
+
+            // Agrega el evento change al select
+            personaJuridicaSelect.addEventListener('change', toggleFields);
+        });
+</script>
 
 
 <!-- Inicio footer -->

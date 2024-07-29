@@ -27,7 +27,9 @@
 <!-- Inicio área publicidad -->
 <div class="bg-gray-300 py-8">
     <div class="container mx-auto px-4">
+        <h1 class="text-center font-bold text-2xl">Home Page</h1>
         <div class="grid grid-cols-3 gap-4">
+            
             <div class="col-span-1">
                 <!-- Contenido de la primera columna -->
             </div>

@@ -27,46 +27,52 @@
 
 <div class="text-black text-center mt-4">
   <h1 class=" text-2xl font-bold">CONTACTO</h1>
-    <p class="text-lg">Diligencie el siguiente formulario para que un asesor se ponga en contacto con usted.</p>
+    <p class="text-lg font-semibold mt-6">Ingrese al primer link para enviar un mensaje al correo ó el segundo link para ingresar al chat de whatsapp.
+      En ambos casos un asesor se comunicará con usted.
+    </p>
 </div>
 <!-- Inicio formulario Contacto -->
-<div class="flex justify-center items-center h-full my-8 mt-8">
-  <div class="bg-white p-8 rounded-lg shadow-lg overflow-y-auto max-h-full">
-    <h2 class="text-2xl font-semibold mb-4">Formulario de Contacto</h2>
-    <form id="contactForm" action="https://formsubmit.co/f11c16f2edc6731c47de02c711fd45a2" method="POST">
-      <div class="mb-4">
-        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-        <input type="text" id="name" name="name" class="form-input mt-1 block w-full border border-gray-300 rounded-md" required>
-      </div>
-      <div class="mb-4">
-        <label for="phone" class="block text-sm font-medium text-gray-700">Número de Contacto</label>
-        <input type="text" id="phone" name="phone" class="form-input mt-1 block w-full border border-gray-300 rounded-md" required>
-      </div>
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" id="email" name="email" class="form-input mt-1 block w-full border border-gray-300 rounded-md" required>
-      </div>
-      <div class="mb-4">
-        <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
-        <textarea id="message" name="message" class="form-textarea mt-1 block w-full border border-gray-300 rounded-md" rows="4" required></textarea>
-      </div>
+<!-- <div class="flex justify-center items-center h-full my-8 mt-8"> -->
+  <!-- <div class="bg-white p-8 rounded-lg shadow-lg overflow-y-auto max-h-full"> -->
+    <!-- <h2 class="text-2xl font-semibold mb-4">Formulario de Contacto</h2> -->
+    <!-- <form id="contactForm" action="https://formsubmit.co/el/worevo" method="POST"> -->
+      <!-- <div class="mb-4"> -->
+        <!-- <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label> -->
+        <!-- <input type="text" id="name" name="name" class="form-input mt-1 block w-full border border-gray-300 rounded-md" required> -->
+      <!-- </div> -->
+      <!-- <div class="mb-4"> -->
+        <!-- <label for="phone" class="block text-sm font-medium text-gray-700">Número de Contacto</label> -->
+        <!-- <input type="text" id="phone" name="phone" class="form-input mt-1 block w-full border border-gray-300 rounded-md" required> -->
+      <!-- </div> -->
+      <!-- <div class="mb-4"> -->
+        <!-- <label for="email" class="block text-sm font-medium text-gray-700">Email</label> -->
+        <!-- <input type="email" id="email" name="email" class="form-input mt-1 block w-full border border-gray-300 rounded-md" required> -->
+      <!-- </div> -->
+      <!-- <div class="mb-4"> -->
+        <!-- <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label> -->
+        <!-- <textarea id="message" name="message" class="form-textarea mt-1 block w-full border border-gray-300 rounded-md" rows="4" required></textarea> -->
+      <!-- </div> -->
       <!-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Enviar</button> -->
-      <input type="submit" value="Enviar" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      <!-- <input type="submit" value="Enviar" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"> -->
       <!-- <input type="hidden" name="_next" value="http://127.0.0.1:8000/">
       <input type="hidden" name="_captcha" value="false"> -->
-    </form>
+    <!-- </form>
   </div>
-</div>
+</div> -->
 <!-- Cierre formulario Contacto -->
-
+ <!-- Inicio botón para abrir formsubmit -->
+<div class="flex justify-center mt-16">
+    <a href="https://formsubmit.co/el/worevo" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Mensaje al correo</a>
+</div>
+ <!-- Fin botón para abrir formsubmit -->
 <!-- Inicio Botón para abrir el chat de WhatsApp -->
-<div class="flex justify-end mb-8 mr-8">
+<div class="flex justify-center mt-16">
     <a href="https://wa.me/573002182505?text=Hola,%20estoy%20interesad@%20en%20tus%20servicios" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Chat de WhatsApp</a>
 </div>
 <!-- Fin Botón para abrir el chat de WhatsApp -->
 
 <!-- Inicio Validar formulario contacto -->
-<script>
+<!-- <script>
   function validateForm() {
     var name = document.getElementById('name').value;
     var phone = document.getElementById('phone').value;
@@ -80,7 +86,7 @@
 
     return true;
   }
-</script>
+</script> -->
 <!-- CIerre Validar formulario contacto -->
 
 

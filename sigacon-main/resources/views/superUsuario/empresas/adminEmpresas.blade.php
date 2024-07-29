@@ -24,7 +24,7 @@
     <h2 class="text-xl font-semibold">Lista de Empresas</h2>
     <!-- Barra de búsqueda -->
     <div class="mt-4">
-        <input type="text" id="searchInput" placeholder="Buscar por nombre" class="border border-gray-400 px-4 py-2 mb-4 mr-6">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre comercial" class="border border-gray-400 px-4 py-2 mb-4 mr-6">
         <!-- Agregar Empresa -->
         <a href="{{ route('empresas.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Agregar Empresa</a>
     </div>

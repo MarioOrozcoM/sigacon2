@@ -114,7 +114,7 @@
             </div>
     </div>
             <div>
-                <h2 class="text-xl font-semibold mb-4">Datos Fiscales:</h2>
+                <h2 class="text-xl font-semibold mb-4">Datos Fiscales (Opcionales):</h2>
                 <div class="mb-4">
                     <label for="autoretenedor_renta" class="block text-gray-700 text-sm font-bold mb-2">AutoRetenedor Renta:</label>
                     <select name="autoretenedor_renta" id="autoretenedor_renta" class="border border-gray-400 rounded-md py-2 px-3 w-full">
@@ -163,11 +163,12 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <!-- Botón para crear el usuario -->
-            <div class="mt-8">
+                            <!-- Botón para crear el usuario -->
+            <div class="mt-8 flex justify-center">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Crear Usuario</button>
             </div>
+            </div>
+
         </form>
 
 </div>
