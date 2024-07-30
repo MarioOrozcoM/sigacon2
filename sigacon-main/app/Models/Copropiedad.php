@@ -94,5 +94,6 @@ class Copropiedad extends Model
         'imputacionContable_Cr',
         'aplicarA_conceptoFacturacion',
         'tasaMensual',
+        'logo',
     ];
 }

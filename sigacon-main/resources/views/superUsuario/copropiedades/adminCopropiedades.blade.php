@@ -37,6 +37,7 @@
             <tr class="uppercase">
                 <th class="border border-gray-400 px-4 py-2 w-1/6">Nit Copropiedad</th>
                 <th class="border border-gray-400 px-4 py-2 w-1/3">Nombre Copropiedad</th>
+                <th class="border border-gray-400 px-4 py-2 w-1/4">Logotipo</th>
                 <th class="border border-gray-400 px-4 py-2 w-1/12">Acciones</th>
             </t
         </thead>
@@ -49,6 +50,9 @@
 
             </td>
                 <td class="text-center border border-gray-400 px-4 py-2 nombre-copropiedad">{{ $copropiedad->nombre_copropiedad }}</td>
+                <td class="border border-gray-400 px-4 py-2 flex items-center justify-center">
+                    <img src="{{ asset($copropiedad->logo) }}" alt="Logo de la copropiedad" class="h-16 w-auto">
+                </td>
                     <td class="border border-gray-400 px-4 py-2">
                         <div class="flex justify-center">
                             <form class="mr-2" action="{{ route('copropiedades.edit', $copropiedad->id) }}">

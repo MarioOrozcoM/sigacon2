@@ -384,6 +384,10 @@
                     <label for="tasaMensual" class="block text-gray-700 text-sm font-bold mb-2">Tasa Mensual %:</label>
                     <input type="text" id="tasaMensual" name="tasaMensual" value="{{ old('tasaMensual') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
                 </div>
+                <div class="mb-4">
+                    <label for="logo" class="block text-gray-700 text-sm font-bold mb-2">Logotipo:</label>
+                    <input type="file" id="logo" name="logo" value="{{ old('logo') }}" class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
             
                 <!-- Botón para crear la copropiedad -->
                 <div class="mt-8">

@@ -384,6 +384,15 @@
                     <label for="tasaMensual" class="block text-gray-700 text-sm font-bold mb-2">Tasa Mensual %:</label>
                     <input type="text" id="tasaMensual" name="tasaMensual" value="{{ $copropiedad->tasaMensual }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
                 </div>
+                <div class="mb-4">
+                    <label for="logo" class="block text-gray-700 text-sm font-bold mb-2">Logotipo:</label>
+                    @if($copropiedad->logo)
+                        <div class="mb-4">
+                        <p class="text-sm text-gray-600">Archivo actual: {{ $copropiedad->logo }}</p>
+                        </div>
+                    @endif
+                    <input type="file" id="logo" name="logo" class="border border-gray-400 rounded-md py-2 px-3 w-full">
+                </div>
             
                 <!-- Botón para actualizar la copropiedad -->
                 <div class="mt-8">

@@ -108,6 +108,7 @@ return new class extends Migration
             $table->enum('aplicarA_conceptoFacturacion', ['Todos los conceptos', 'Periodo Aplicacion', 'Expensa total mes',
             'Incremento expensas mes %', 'Modo aplicación', 'Suma total', 'Cuotas expensas', 'Descuento pronto pago'])->nullable();
             $table->string('tasaMensual')->nullable();
+            $table->string('logo')->nullable();
             $table->boolean('active')->default(true); // Aquí agregamos la columna 'active'
             $table->timestamps();
         });
