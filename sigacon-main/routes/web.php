@@ -131,13 +131,15 @@ Route::put('/empresas/{empresa}', [EmpresaController::class, 'update'])->name('e
 Route::put('/empresas/{empresa}/toggle', [EmpresaController::class, 'toggle'])->name('empresas.toggle');
 
 // Rutas para mostrar la lista de copropiedades y crear una nueva copropiedad
-Route::get('/copropiedades', [CopropiedadController::class, 'index'])->name('copropiedades.index');
-Route::get('/copropiedades/create', [CopropiedadController::class, 'create'])->name('copropiedades.create');
-Route::post('/copropiedades', [CopropiedadController::class, 'store'])->name('copropiedades.store');
+// Route::get('/copropiedades', [CopropiedadController::class, 'index'])->name('copropiedades.index');
+// Route::get('/copropiedades/create', [CopropiedadController::class, 'create'])->name('copropiedades.create');
+// Route::post('/copropiedades', [CopropiedadController::class, 'store'])->name('copropiedades.store');
 
 // Rutas para mostrar el formulario de edición y actualizar una copropiedad
-Route::get('/copropiedades/{copropiedad}/edit', [CopropiedadController::class, 'edit'])->name('copropiedades.edit');
-Route::put('/copropiedades/{copropiedad}', [CopropiedadController::class, 'update'])->name('copropiedades.update');
+// Route::get('/copropiedades/{copropiedad}/edit', [CopropiedadController::class, 'edit'])->name('copropiedades.edit');
+// Route::put('/copropiedades/{copropiedad}', [CopropiedadController::class, 'update'])->name('copropiedades.update');
 
 // Ruta para habilitar o inhabilitar una copropiedad
-Route::put('/copropiedades/{copropiedad}/toggle', [CopropiedadController::class, 'toggle'])->name('copropiedades.toggle');
+// Route::put('/copropiedades/{copropiedad}/toggle', [CopropiedadController::class, 'toggle'])->name('copropiedades.toggle');
+
+//Rutas para mostrar las unidades y crear una nueva Unidad
