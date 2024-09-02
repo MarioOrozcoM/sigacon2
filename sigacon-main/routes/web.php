@@ -7,8 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ExcelEmpresaController;
 use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\CopropiedadController;
-use App\Models\Copropiedad;
+use App\Http\Controllers\UnidadController;
+use App\Models\Unidad;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ use App\Models\Copropiedad;
 |
 */
 
-
+// Rutas publicas
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,10 +37,14 @@ Route::get('/contacto', function () {
 Route::get('/inicio_sesion', function () {
     return view('inicio_sesion');
 });
+// Fin rutas publicas
 
 // Route::get('/user_dashboard', function () {
 //     return view('user_dashboard');
 // });
+
+
+// Inicio rutas privadas
 Route::get('/logados', function () {
     return view('logados');
 });
@@ -142,4 +146,15 @@ Route::put('/empresas/{empresa}/toggle', [EmpresaController::class, 'toggle'])->
 // Ruta para habilitar o inhabilitar una copropiedad
 // Route::put('/copropiedades/{copropiedad}/toggle', [CopropiedadController::class, 'toggle'])->name('copropiedades.toggle');
 
-//Rutas para mostrar las unidades y crear una nueva Unidad
+
+// Rutas para el controlador de Unidades
+// Route::resource('unidades', UnidadController::class);
+
+// Rutas personalizadas para el controlador de Unidades
+Route::get('/unidades', [UnidadController::class, 'index'])->name('unidades.index');
+Route::get('/unidades/create', [UnidadController::class, 'create'])->name('unidades.create');
+Route::post('/unidades', [UnidadController::class, 'store'])->name('unidades.store');
+Route::get('/unidades/{unidad}/edit', [UnidadController::class, 'edit'])->name('unidades.edit');
+Route::put('/unidades/{unidad}', [UnidadController::class, 'update'])->name('unidades.update');
+Route::delete('/unidades/{unidad}', [UnidadController::class, 'destroy'])->name('unidades.destroy');
+

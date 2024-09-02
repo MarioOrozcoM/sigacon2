@@ -16,7 +16,7 @@
             <a href="{{ url('/main') }}" class="hover:text-gray-400">INICIO</a>
             <a href="{{ url('/admin/users') }}" class="hover:text-gray-400">USUARIOS</a>
             <a href="{{ url('/empresas') }}" class="hover:text-gray-400">EMPRESAS</a>
-            <a href="#" class="hover:text-gray-400">Unidades</a>
+            <a href="{{ route('unidades.index') }}" class="hover:text-gray-400">Unidades</a>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="hover:text-gray-400">CERRAR SESIÓN</button>

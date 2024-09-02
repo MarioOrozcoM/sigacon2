@@ -36,6 +36,7 @@
             <tr class="uppercase">
                 <th class="border border-gray-400 px-4 py-2">Nombre</th>
                 <th class="border border-gray-400 px-4 py-2">Email</th>
+                <th class="border border-gray-400 px-4 py-2">Teléfono</th>
                 <th class="border border-gray-400 px-4 py-2">Rol</th>
                 <th class="border border-gray-400 px-4 py-2 w-40">Acciones</th>
             </tr>
@@ -49,6 +50,7 @@
                 {{ $user->first_lastname }} {{ $user->second_lastname ? $user->second_lastname : '' }}
             </td>
                 <td class="border border-gray-400 px-4 py-2">{{ $user->email }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ $user->phone }}</td>
                 <td class="border border-gray-400 px-4 py-2">{{ $user->rol }}</td>
                 <td class="border border-gray-400 px-4 py-2 flex items-center">
                     <form class="mr-2" action="{{ route('users.edit', $user->id) }}">
