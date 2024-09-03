@@ -11,20 +11,35 @@ class UnidadController extends Controller
     /**
      * Muestra la lista de unidades.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $unidades = Unidad::with('empresa')->get();
-        return view('superUsuario.unidades.adminUnidades', compact('unidades'));
+        // Obtener las empresas de tipo "Propiedad Horizontal"
+        $empresas = Empresa::where('tipo_empresa', 'Propiedad Horizontal')->get();
+    
+        // Obtener solo las unidades de la empresa seleccionada, si hay una selección
+        $unidades = Unidad::with('empresa')
+            ->when($request->empresa_id, function ($query) use ($request) {
+                $query->where('empresa_id', $request->empresa_id);
+            })
+            ->get();
+    
+        return view('superUsuario.unidades.adminUnidades', compact('empresas', 'unidades'));
     }
+    
+    
 
     /**
      * Muestra el formulario para crear una nueva unidad.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $empresas = Empresa::all(); // Obtenemos todas las empresas para seleccionarlas en el formulario
-        return view('unidades.create', compact('empresas'));
+        // Obtener la empresa seleccionada basada en 'empresa_id'
+        $empresa = Empresa::findOrFail($request->input('empresa_id'));
+    
+        // Pasar la empresa seleccionada a la vista
+        return view('superUsuario.unidades.createUnidad', compact('empresa'));
     }
+    
 
     /**
      * Guarda una nueva unidad en la base de datos.
@@ -55,9 +70,10 @@ class UnidadController extends Controller
      */
     public function edit(Unidad $unidad)
     {
-        $empresas = Empresa::all(); // Para seleccionar una empresa al editar
-        return view('unidades.edit', compact('unidad', 'empresas'));
+        $empresas = Empresa::where('tipo_empresa', 'Propiedad Horizontal')->get(); // Filtrar empresas
+        return view('superUsuario.unidades.editUnidad', compact('unidad', 'empresas'));
     }
+    
 
     /**
      * Actualiza una unidad existente en la base de datos.
