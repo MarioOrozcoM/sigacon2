@@ -33,6 +33,14 @@
         </select>
     </form>
 
+    <!-- Barra de Búsqueda para Filtrar Unidades -->
+    @if(request('empresa_id'))
+        <div class="flex justify-center mb-4">
+            <input type="text" id="searchPropietario" placeholder="Buscar por Propietario" class="border rounded p-2 mr-2">
+            <input type="text" id="searchNumber" placeholder="Buscar por Número" class="border rounded p-2">
+        </div>
+    @endif
+
     <!-- Botón para Crear Nueva Unidad -->
     @if(request('empresa_id'))
         <div class="text-center mt-4">
@@ -41,46 +49,85 @@
     @endif
 
     <!-- Mostrar las Unidades de la Empresa Seleccionada -->
-    <div class="overflow-x-auto px-4">
-        <table class=" w-full mt-10 bg-white border border-gray-200 shadow-md">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="py-2 px-4 border-b text-left">Tipo de Unidad</th>
-                    <th class="py-2 px-4 border-b text-left">Torre/Bloque</th>
-                    <th class="py-2 px-4 border-b text-left">Número</th>
-                    <th class="py-2 px-4 border-b text-left">Propietario</th>
-                    <th class="py-2 px-4 border-b text-left">Acciones</th> 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($unidades as $unidad)
-                    @if(request('empresa_id') == $unidad->empresa_id)
-                        <tr class="hover:bg-gray-50">
-                            <td class="py-2 px-4 border-b">{{ $unidad->tipoUnidad }}</td>
-                            <td class="py-2 px-4 border-b">{{ $unidad->torreBloque }}</td>
-                            <td class="py-2 px-4 border-b">{{ $unidad->number }}</td>
-                            <td class="py-2 px-4 border-b">{{ $unidad->propietario }}</td>
-                            <td class="py-2 px-4 border-b">
+<div class="overflow-x-auto px-4">
+    <table class="w-3/4 mx-auto mt-10 bg-white border border-gray-200 shadow-md">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="py-2 px-4 border-b text-left">Tipo de Unidad</th>
+                <th class="py-2 px-4 border-b text-left">Torre/Bloque</th>
+                <th class="py-2 px-4 border-b text-left">Número</th>
+                <th class="py-2 px-4 border-b text-left">Propietario</th>
+                <th class="py-2 px-4 border-b text-left w-1/6">Acciones</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($unidades as $unidad)
+                @if(request('empresa_id') == $unidad->empresa_id)
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-2 px-4 border-b">{{ $unidad->tipoUnidad }}</td>
+                        <td class="py-2 px-4 border-b">{{ $unidad->torreBloque }}</td>
+                        <td class="py-2 px-4 border-b">{{ $unidad->number }}</td>
+                        <td class="py-2 px-4 border-b">{{ $unidad->propietario }}</td>
+                        <td class="py-2 px-4 border-b">
+                            <!-- Contenedor Flex con Separación entre los Botones -->
+                            <div class="flex space-x-4">
                                 <!-- Botón para Editar la Unidad -->
                                 <a href="{{ route('unidades.edit', $unidad->id) }}" class="text-blue-500 hover:text-blue-700">Editar</a>
 
-                                <!-- Botón para Eliminar la Unidad -->
+                                <!-- Botón para Eliminar la Unidad con Confirmación -->
                                 <form action="{{ route('unidades.destroy', $unidad->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 ml-2" onclick="return confirm('¿Estás seguro de eliminar esta unidad?')">Eliminar</button>
+                                    <button type="submit" 
+                                            class="text-red-500 hover:text-red-700"
+                                            onclick="return confirm('¿Estás seguro de eliminar esta unidad? Esta acción no se puede deshacer.')">
+                                        Eliminar
+                                    </button>
                                 </form>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+
+
 
     <!-- Inicio footer -->
     @include('includes.footer')
     <!-- Fin footer -->
+
+    <!-- Script para la búsqueda en JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchPropietario = document.getElementById('searchPropietario');
+            const searchNumber = document.getElementById('searchNumber');
+            const tableRows = document.querySelectorAll('#unidadesTable tbody tr');
+
+            function filterTable() {
+                const propietarioValue = searchPropietario.value.toLowerCase();
+                const numberValue = searchNumber.value.toLowerCase();
+
+                tableRows.forEach(row => {
+                    const propietario = row.querySelector('.unidad-propietario').textContent.toLowerCase();
+                    const number = row.querySelector('.unidad-number').textContent.toLowerCase();
+
+                    if ((propietario.includes(propietarioValue) || !propietarioValue) &&
+                        (number.includes(numberValue) || !numberValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            searchPropietario.addEventListener('input', filterTable);
+            searchNumber.addEventListener('input', filterTable);
+        });
+    </script>
 
 </body>
 </html>

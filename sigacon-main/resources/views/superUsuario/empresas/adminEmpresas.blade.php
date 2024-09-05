@@ -30,7 +30,7 @@
     </div>
 
     <!-- Lista de Empresas -->
-    <table class="w-full border-collapse border border-gray-400">
+    <table class="w-full border-collapse border border-gray-400 mb-4">
         <thead>
             <tr class="uppercase">
                 <th class="border border-gray-400 px-4 py-2 w-1/6">Código Empresa</th>
