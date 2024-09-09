@@ -8,6 +8,7 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ExcelEmpresaController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UnidadController;
+use App\Http\Controllers\CuotaAdministracionController;
 use App\Models\Unidad;
 
 /*
@@ -158,3 +159,10 @@ Route::get('/unidades/{unidad}/edit', [UnidadController::class, 'edit'])->name('
 Route::put('/unidades/{unidad}', [UnidadController::class, 'update'])->name('unidades.update');
 Route::delete('/unidades/{unidad}', [UnidadController::class, 'destroy'])->name('unidades.destroy');
 
+// Rutas personalizadas para el controlador de Cuotas de Administración
+Route::get('/cuotas', [CuotaAdministracionController::class, 'index'])->name('cuotas.index');
+Route::get('/cuotas/create', [CuotaAdministracionController::class, 'create'])->name('cuotas.create');
+Route::post('/cuotas', [CuotaAdministracionController::class, 'store'])->name('cuotas.store');
+Route::get('/cuotas/{cuota}/edit', [CuotaAdministracionController::class, 'edit'])->name('cuotas.edit');
+Route::put('/cuotas/{cuota}', [CuotaAdministracionController::class, 'update'])->name('cuotas.update');
+Route::delete('/cuotas/{cuota}', [CuotaAdministracionController::class, 'destroy'])->name('cuotas.destroy');

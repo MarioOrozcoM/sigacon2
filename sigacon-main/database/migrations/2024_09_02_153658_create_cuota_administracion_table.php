@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('cuota_administracion', function (Blueprint $table) {
             $table->id(); // Primary key, autoincrement
+            $table->string('nombre');
             $table->decimal('cuotaMensual1'); // Cuota Mensual 1
             $table->decimal('cuotaMensual1SinDescuento'); // Cuota Mensual 1 sin descuento
             $table->decimal('descuento'); // Descuento
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->decimal('diferenciaMensualIncremento'); // Diferencia mensual incremento
             $table->decimal('valorRetroactivo'); // Valor retroactivo
             $table->decimal('totalPagarSinDescuento'); // Total a pagar sin descuento
-            $table->foreignId('unidad_id')->constrained('unidades')->onDelete('cascade'); // Foreign key hacia unidades
+            // $table->foreignId('unidad_id')->constrained('unidades')->onDelete('cascade'); // Foreign key hacia unidades
             $table->timestamps(); // Campos created_at y updated_at
         });
     }

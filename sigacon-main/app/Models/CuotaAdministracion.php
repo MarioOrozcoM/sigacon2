@@ -13,6 +13,7 @@ class CuotaAdministracion extends Model
 
     // Los campos que se pueden asignar masivamente
     protected $fillable = [
+        'nombre', // Agrega 'nombre' a los campos asignables
         'cuotaMensual1',
         'cuotaMensual1SinDescuento',
         'descuento',
@@ -20,14 +21,15 @@ class CuotaAdministracion extends Model
         'diferenciaMensualIncremento',
         'valorRetroactivo',
         'totalPagarSinDescuento',
-        'unidad_id', // Este es el campo de la clave foránea
+        // 'unidad_id', // Este es el campo de la clave foránea
     ];
 
     /**
      * Relación uno a uno con Unidad
      */
-    public function unidad()
+    public function unidades()
     {
-        return $this->belongsTo(Unidad::class);
+        return $this->belongsToMany(Unidad::class, 'cuota_unidad');
     }
+    
 }

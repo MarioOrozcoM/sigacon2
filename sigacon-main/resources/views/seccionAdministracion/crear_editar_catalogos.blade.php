@@ -26,7 +26,7 @@
 
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">1- Crear editar Cuentas</a>
+                <a href="{{ url('/cuotas') }}">1- Crear editar Cuotas de Administración</a>
             </td>
         </tr>
         <tr>
