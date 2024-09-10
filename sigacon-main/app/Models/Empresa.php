@@ -49,5 +49,10 @@ class Empresa extends Model
 
     ];
     
+    public function unidades()
+{
+    return $this->hasMany(Unidad::class); // Ajusta esto según tu relación
+}
+
 
 }

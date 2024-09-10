@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">2- Crear editar Usuarios/Roles</a>
+                <a href="{{ url('/cuotasavailables') }}">2- Asignar Cuota de Administración</a>
             </td>
         </tr>
         <tr>

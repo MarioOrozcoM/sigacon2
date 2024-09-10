@@ -9,6 +9,7 @@ use App\Http\Controllers\ExcelEmpresaController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\CuotaAdministracionController;
+use App\Http\Controllers\CuotaUnidadController;
 use App\Models\Unidad;
 
 /*
@@ -166,3 +167,9 @@ Route::post('/cuotas', [CuotaAdministracionController::class, 'store'])->name('c
 Route::get('/cuotas/{cuota}/edit', [CuotaAdministracionController::class, 'edit'])->name('cuotas.edit');
 Route::put('/cuotas/{cuota}', [CuotaAdministracionController::class, 'update'])->name('cuotas.update');
 Route::delete('/cuotas/{cuota}', [CuotaAdministracionController::class, 'destroy'])->name('cuotas.destroy');
+
+// Rutas para asignar cuota de administracion a las unidades
+Route::get('/cuotasavailables', [CuotaUnidadController::class, 'showCuotas'])->name('cuotas.show');
+Route::get('/cuotas/{cuota}/empresas', [CuotaUnidadController::class, 'showEmpresas'])->name('cuotas.empresas');
+Route::get('/cuotas/{cuota}/empresas/{empresa}/unidades', [CuotaUnidadController::class, 'showUnidades'])->name('cuotas.unidades');
+Route::post('/cuotas/{cuota}/empresas/{empresa}/unidades', [CuotaUnidadController::class, 'assignCuota'])->name('cuotas.assign');
