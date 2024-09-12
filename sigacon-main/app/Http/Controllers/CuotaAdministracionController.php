@@ -10,12 +10,12 @@ class CuotaAdministracionController extends Controller
     public function index()
     {
         $cuotas = CuotaAdministracion::all();
-        return view('superUsuario.cuotas.adminCuotasAdministracion', compact('cuotas'));
+        return view('superUsuario.propiedadHorizontal.cuotas.adminCuotasAdministracion', compact('cuotas'));
     }
 
     public function create()
     {
-        return view('superUsuario.cuotas.createCuotaAdministracion');
+        return view('superUsuario.propiedadHorizontal.cuotas.createCuotaAdministracion');
     }
 
     public function store(Request $request)
@@ -38,7 +38,7 @@ class CuotaAdministracionController extends Controller
 
     public function edit(CuotaAdministracion $cuota)
     {
-        return view('superUsuario.cuotas.editCuotaAdministracion', compact('cuota'));
+        return view('superUsuario.propiedadHorizontal.cuotas.editCuotaAdministracion', compact('cuota'));
     }
 
     public function update(Request $request, CuotaAdministracion $cuota)

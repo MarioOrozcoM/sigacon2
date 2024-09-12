@@ -13,7 +13,7 @@ class CuotaUnidadController extends Controller
     public function showCuotas()
     {
         $cuotas = CuotaAdministracion::all();
-        return view('superUsuario.asignarCuota.indexCuotas', compact('cuotas'));
+        return view('superUsuario.propiedadHorizontal.asignarCuota.indexCuotas', compact('cuotas'));
     }
 
     // Mostrar las empresas de Propiedad Horizontal para la cuota seleccionada
@@ -23,7 +23,7 @@ class CuotaUnidadController extends Controller
         $empresas = Empresa::where('tipo_empresa', 'Propiedad Horizontal')->get();
     
         // Pasar la variable $cuotaId a la vista
-        return view('superUsuario.asignarCuota.showEmpresas', compact('empresas', 'cuotaId'));
+        return view('superUsuario.propiedadHorizontal.asignarCuota.showEmpresas', compact('empresas', 'cuotaId'));
     }
     
 
@@ -33,7 +33,7 @@ public function showUnidades(CuotaAdministracion $cuota, Empresa $empresa)
     $unidades = $empresa->unidades; // Asegúrate de que la relación está definida
     $cuotaId = $cuota->id;
     $empresaId = $empresa->id;
-    return view('superUsuario.asignarCuota.showUnidades', compact('cuota', 'empresa', 'unidades', 'cuotaId', 'empresaId'));
+    return view('superUsuario.propiedadHorizontal.asignarCuota.showUnidades', compact('cuota', 'empresa', 'unidades', 'cuotaId', 'empresaId'));
 }
 
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\CuotaAdministracionController;
 use App\Http\Controllers\CuotaUnidadController;
+use App\Http\Controllers\RevisarCuotasController;
 use App\Models\Unidad;
 
 /*
@@ -173,3 +174,9 @@ Route::get('/cuotasavailables', [CuotaUnidadController::class, 'showCuotas'])->n
 Route::get('/cuotas/{cuota}/empresas', [CuotaUnidadController::class, 'showEmpresas'])->name('cuotas.empresas');
 Route::get('/cuotas/{cuota}/empresas/{empresa}/unidades', [CuotaUnidadController::class, 'showUnidades'])->name('cuotas.unidades');
 Route::post('/cuotas/{cuota}/empresas/{empresa}/unidades', [CuotaUnidadController::class, 'assignCuota'])->name('cuotas.assign');
+
+// Rutas para revisar y gestionar las cuotas de administración asignadas
+Route::get('/revisar/empresas', [RevisarCuotasController::class, 'showEmpresas'])->name('revisar.empresas');
+Route::get('/revisar/empresas/{empresa}/unidades', [RevisarCuotasController::class, 'showUnidades'])->name('revisar.unidades');
+// Ruta ajustada para usar POST con el método DELETE en el formulario
+Route::post('/revisar/empresas/{empresa}/unidades/{unidad}/remove-cuota', [RevisarCuotasController::class, 'removeCuota'])->name('revisar.removeCuota');

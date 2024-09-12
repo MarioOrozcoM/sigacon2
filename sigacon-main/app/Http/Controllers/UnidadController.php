@@ -23,7 +23,7 @@ class UnidadController extends Controller
             })
             ->get();
     
-        return view('superUsuario.unidades.adminUnidades', compact('empresas', 'unidades'));
+        return view('superUsuario.propiedadHorizontal.unidades.adminUnidades', compact('empresas', 'unidades'));
     }
     
     
@@ -37,7 +37,7 @@ class UnidadController extends Controller
         $empresa = Empresa::findOrFail($request->input('empresa_id'));
     
         // Pasar la empresa seleccionada a la vista
-        return view('superUsuario.unidades.createUnidad', compact('empresa'));
+        return view('superUsuario.propiedadHorizontal.unidades.createUnidad', compact('empresa'));
     }
     
 
@@ -71,7 +71,7 @@ class UnidadController extends Controller
     public function edit(Unidad $unidad)
     {
         $empresas = Empresa::where('tipo_empresa', 'Propiedad Horizontal')->get(); // Filtrar empresas
-        return view('superUsuario.unidades.editUnidad', compact('unidad', 'empresas'));
+        return view('superUsuario.propiedadHorizontal.unidades.editUnidad', compact('unidad', 'empresas'));
     }
     
 

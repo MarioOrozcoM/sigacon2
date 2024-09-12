@@ -36,42 +36,42 @@
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">3- Crear editar Reportes</a>
+                <a href="{{ url('/revisar/empresas') }}">3- Administrar cuotas de Administración asignadas</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">4- Crear editar Documentos</a>
+                <a href="#">4-</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">5- Crear editar Subcategorías</a>
+                <a href="#">5-</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">6- Crear editar Organización Territorial y Códigos</a>
+                <a href="#">6-</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">7- Crear editar Nomina</a>
+                <a href="#">7-</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">8- Crear editar Inventarios</a>
+                <a href="#">8-</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">9- Crear editar Utilidades</a>
+                <a href="#">9-</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">10- Crear editar Contabilidad</a>
+                <a href="#">10-</a>
             </td>
         </tr>
     </table>

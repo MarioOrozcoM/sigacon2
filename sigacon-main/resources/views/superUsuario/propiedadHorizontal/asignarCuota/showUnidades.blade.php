@@ -30,7 +30,7 @@
         <ul class="bg-white rounded-lg shadow-md divide-y divide-gray-200">
             @forelse($unidades as $unidad)
                 <li class="flex justify-between items-center p-4 gap-4">
-                    <span class="text-gray-700 font-medium">{{ $unidad->propietario }} - {{ $unidad->tipoUnidad }}</span>
+                    <span class="text-gray-700 font-medium">{{ $unidad->propietario }} - {{ $unidad->tipoUnidad }} - {{ $unidad->number }}</span>
                     <input type="checkbox" name="unidad_ids[]" value="{{ $unidad->id }}" class="form-checkbox h-5 w-5 text-green-600">
                 </li>
             @empty
