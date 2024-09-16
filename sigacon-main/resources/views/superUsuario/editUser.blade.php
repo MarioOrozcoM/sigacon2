@@ -9,7 +9,7 @@
 <body class="flex flex-col min-h-screen">
     
 <!-- Inicio navegación superior -->
-@include('superUsuario.headerSuper') <!-- HEADER --> 
+@include('includes.header_redirect_main') <!-- HEADER --> 
 <!-- Fin navegación superior -->
 
 <!-- Inicio formulario editar info usuario -->

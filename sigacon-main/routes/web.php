@@ -65,6 +65,10 @@ Route::get('/crear_editar_catalogos', function () {
     return view('seccionAdministracion.crear_editar_catalogos');
 });
 
+Route::get('/options_ph', function () {
+    return view('seccionPropiedadHorizontal.optionsPropiedadHorizontal');
+});
+
 // Route::get('/adminEmpresas', function () {
 //     return view('superUsuario.empresas.adminEmpresas');
 // });

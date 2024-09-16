@@ -9,7 +9,7 @@
 <body class="flex flex-col min-h-screen">
 
 <!-- Inicio navegación superior -->
-@include('superUsuario.headerSuper') <!-- HEADER --> 
+@include('includes.header_redirect_main') <!-- HEADER --> 
 <!-- Fin navegación superior -->
 
 <h2 class="text-xl font-semibold text-center mt-4">Editar Cuota de Administración</h2>

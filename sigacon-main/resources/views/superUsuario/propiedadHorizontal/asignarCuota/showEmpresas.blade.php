@@ -8,9 +8,9 @@
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <!-- Inicio navegación superior -->
-    @include('superUsuario.headerSuper') <!-- HEADER --> 
-    <!-- Fin navegación superior -->
+<!-- Inicio navegación superior -->
+@include('includes.header_redirect_main') <!-- HEADER --> 
+<!-- Fin navegación superior -->
 
     <!-- Inicio rol -->
     @include('includes.show_rol')

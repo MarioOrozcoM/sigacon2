@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <title>Crear/editar Catalogos</title>
+    <title>Opciones Propiedad Horizontal</title>
 </head>
 <body class="flex flex-col min-h-screen">
- 
+
 <!-- Inicio navegación superior -->
 @include('includes.header_redirect_main')
 <!-- Fin navegación superior -->
@@ -16,8 +16,9 @@
 @include('includes.show_rol')
 <!-- Cierre empresaRol -->
 
+
 <div>
-    <h1 class="text-center font-semibold text-2xl">Crear/Editar Catálogos</h1>
+    <h1 class="text-center font-semibold text-2xl">Opciones en la Administración de Propiedad Horizontal</h1>
 </div>
 
 <!-- Inicio opciones disponibles -->
@@ -26,17 +27,17 @@
 
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">1- </a>
+                <a href="{{ url('/cuotas') }}">1- Crear editar Cuotas de Administración</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">2- </a>
+                <a href="{{ url('/cuotasavailables') }}">2- Asignar Cuota de Administración</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">3- </a>
+                <a href="{{ url('/revisar/empresas') }}">3- Administrar cuotas de Administración asignadas</a>
             </td>
         </tr>
         <tr>
@@ -84,7 +85,6 @@
 @include('includes.footer')
 <!-- Cierre Footer -->
 
-
 <!-- Estilos CSS -->
 <style>
     .border-collapse,
@@ -93,6 +93,6 @@
         border-color: #C4C4C4;
     }
 </style>
-
+    
 </body>
 </html>

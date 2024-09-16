@@ -1,1 +1,0 @@
-Actualmente no se está usando Copropiedades, debido a que se cambió un poco la estructura de la base de datos.

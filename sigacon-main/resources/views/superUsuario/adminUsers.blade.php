@@ -9,7 +9,7 @@
 <body class="flex flex-col min-h-screen">
 
 <!-- Inicio navegación superior -->
-@include('superUsuario.headerSuper') <!-- HEADER --> 
+@include('includes.header_redirect_main') <!-- HEADER --> 
 <!-- Fin navegación superior -->
 <div class="top-left-info ml-8 mt-4 text-lg text-semibold">
         <p>{{ $user->rol }}</p>

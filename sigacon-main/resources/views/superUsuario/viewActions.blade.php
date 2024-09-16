@@ -39,28 +39,28 @@
             <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">""</button></td>
             </tr>
             <tr class="divide-x">
-                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Activar modulos, usuarios y permisos</button></td>
+                <td class="px-6 py-4"><button onclick="window.location.href = '/options_ph';" class="hover:underline">Propiedad Horizontal</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Cuenta por Cobrar</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Cuenta por Cobrar</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Estadísticas</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">""</button></td>
             </tr>
             <tr class="divide-x">
-                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Utilidades</button></td>
+                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Activar modulos, usuarios y permisos</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Cuenta por Pagar</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Cuenta por Pagar</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Publicaciones</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">""</button></td>
             </tr>
             <tr class="divide-x">
-                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Parámetros</button></td>
+                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Utilidades</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Nomina</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Nomina</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Eventos</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">""</button></td>
             </tr>
             <tr class="divide-x">
-                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline"></button></td>
+                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Parámetros</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Inventarios</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Inventarios</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Alquiler Servicios</button></td>

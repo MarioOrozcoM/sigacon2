@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <title>Crear Empresa</title>
 </head>
 <body class="flex flex-col min-h-screen">
     
 <!-- Inicio navegación superior -->
-@include('superUsuario.headerSuper') <!-- HEADER --> 
+@include('includes.header_redirect_main') <!-- HEADER --> 
 <!-- Fin navegación superior -->
 
 <h2 class="text-xl font-semibold text-center mt-4">Agregar Nueva Empresa</h2>
