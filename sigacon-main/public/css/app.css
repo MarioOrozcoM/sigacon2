@@ -601,6 +601,12 @@ video {
 .mt-auto {
   margin-top: auto;
 }
+.mb-12 {
+  margin-bottom: 3rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
 .block {
   display: block;
 }
@@ -711,9 +717,6 @@ video {
 }
 .justify-between {
   justify-content: space-between;
-}
-.gap-2 {
-  gap: 0.5rem;
 }
 .gap-4 {
   gap: 1rem;

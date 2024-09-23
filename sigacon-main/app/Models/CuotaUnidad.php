@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class CuotaUnidad extends Model
 {
     use HasFactory;
-    protected $table = 'cuota_unidad';
+
+    protected $table = 'cuotasUnidad';
 
     protected $fillable = [
-        'cuota_administracion_id',
+        'cuota_ph_id',
         'unidad_id',
-        //'monto',
     ];
 
-    public function cuotaAdministracion()
+    public function cuotaPH()
     {
-        return $this->belongsTo(CuotaAdministracion::class);
+        return $this->belongsTo(CuotaPH::class, 'cuota_ph_id');
     }
 
     public function unidad()

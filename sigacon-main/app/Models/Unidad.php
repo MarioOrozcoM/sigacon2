@@ -36,11 +36,12 @@ class Unidad extends Model
     }
 
     /**
-     * Relación uno a uno con CuotaAdministracion
+     * Relación con CuotaUnidad
      */
-    public function cuotas()
+        public function cuotasUnidad()
     {
-        return $this->belongsToMany(CuotaAdministracion::class, 'cuota_unidad');
+        return $this->hasMany(CuotaUnidad::class);
     }
+
     
 }

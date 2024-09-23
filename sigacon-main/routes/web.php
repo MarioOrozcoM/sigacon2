@@ -8,9 +8,9 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ExcelEmpresaController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UnidadController;
-use App\Http\Controllers\CuotaAdministracionController;
-use App\Http\Controllers\CuotaUnidadController;
-use App\Http\Controllers\RevisarCuotasController;
+use App\Http\Controllers\ConceptoController;
+use App\Http\Controllers\CuotasPHController;
+
 use App\Models\Unidad;
 
 /*
@@ -141,18 +141,6 @@ Route::put('/empresas/{empresa}', [EmpresaController::class, 'update'])->name('e
 // Ruta para habilitar o inhabilitar una empresa
 Route::put('/empresas/{empresa}/toggle', [EmpresaController::class, 'toggle'])->name('empresas.toggle');
 
-// Rutas para mostrar la lista de copropiedades y crear una nueva copropiedad
-// Route::get('/copropiedades', [CopropiedadController::class, 'index'])->name('copropiedades.index');
-// Route::get('/copropiedades/create', [CopropiedadController::class, 'create'])->name('copropiedades.create');
-// Route::post('/copropiedades', [CopropiedadController::class, 'store'])->name('copropiedades.store');
-
-// Rutas para mostrar el formulario de edición y actualizar una copropiedad
-// Route::get('/copropiedades/{copropiedad}/edit', [CopropiedadController::class, 'edit'])->name('copropiedades.edit');
-// Route::put('/copropiedades/{copropiedad}', [CopropiedadController::class, 'update'])->name('copropiedades.update');
-
-// Ruta para habilitar o inhabilitar una copropiedad
-// Route::put('/copropiedades/{copropiedad}/toggle', [CopropiedadController::class, 'toggle'])->name('copropiedades.toggle');
-
 
 // Rutas para el controlador de Unidades
 // Route::resource('unidades', UnidadController::class);
@@ -165,22 +153,16 @@ Route::get('/unidades/{unidad}/edit', [UnidadController::class, 'edit'])->name('
 Route::put('/unidades/{unidad}', [UnidadController::class, 'update'])->name('unidades.update');
 Route::delete('/unidades/{unidad}', [UnidadController::class, 'destroy'])->name('unidades.destroy');
 
-// Rutas personalizadas para el controlador de Cuotas de Administración
-Route::get('/cuotas', [CuotaAdministracionController::class, 'index'])->name('cuotas.index');
-Route::get('/cuotas/create', [CuotaAdministracionController::class, 'create'])->name('cuotas.create');
-Route::post('/cuotas', [CuotaAdministracionController::class, 'store'])->name('cuotas.store');
-Route::get('/cuotas/{cuota}/edit', [CuotaAdministracionController::class, 'edit'])->name('cuotas.edit');
-Route::put('/cuotas/{cuota}', [CuotaAdministracionController::class, 'update'])->name('cuotas.update');
-Route::delete('/cuotas/{cuota}', [CuotaAdministracionController::class, 'destroy'])->name('cuotas.destroy');
+//Rutas personalizadas para el controlador ConceptoController
+Route::get('/conceptos', [ConceptoController::class, 'index'])->name('conceptos.index');
+Route::get('/conceptos/crear', [ConceptoController::class, 'create'])->name('conceptos.create');
+Route::post('/conceptos', [ConceptoController::class, 'store'])->name('conceptos.store');
+Route::delete('/conceptos/{concepto}', [ConceptoController::class, 'destroy'])->name('conceptos.destroy');
 
-// Rutas para asignar cuota de administracion a las unidades
-Route::get('/cuotasavailables', [CuotaUnidadController::class, 'showCuotas'])->name('cuotas.show');
-Route::get('/cuotas/{cuota}/empresas', [CuotaUnidadController::class, 'showEmpresas'])->name('cuotas.empresas');
-Route::get('/cuotas/{cuota}/empresas/{empresa}/unidades', [CuotaUnidadController::class, 'showUnidades'])->name('cuotas.unidades');
-Route::post('/cuotas/{cuota}/empresas/{empresa}/unidades', [CuotaUnidadController::class, 'assignCuota'])->name('cuotas.assign');
-
-// Rutas para revisar y gestionar las cuotas de administración asignadas
-Route::get('/revisar/empresas', [RevisarCuotasController::class, 'showEmpresas'])->name('revisar.empresas');
-Route::get('/revisar/empresas/{empresa}/unidades', [RevisarCuotasController::class, 'showUnidades'])->name('revisar.unidades');
-// Ruta ajustada para usar POST con el método DELETE en el formulario
-Route::post('/revisar/empresas/{empresa}/unidades/{unidad}/remove-cuota', [RevisarCuotasController::class, 'removeCuota'])->name('revisar.removeCuota');
+//Rutas personalizadas para el controlador CuotasPHController
+Route::get('/cuotasPH', [CuotasPHController::class, 'index'])->name('cuotasPH.index');
+Route::get('/cuotasPH/crear', [CuotasPHController::class, 'create'])->name('cuotasPH.create');
+Route::post('/cuotasPH', [CuotasPHController::class, 'store'])->name('cuotasPH.store');
+Route::get('/cuotasPH/{cuota}/editar', [CuotasPHController::class, 'edit'])->name('cuotasPH.edit');
+Route::put('/cuotasPH/{cuota}', [CuotasPHController::class, 'update'])->name('cuotasPH.update');
+Route::delete('/cuotasPH/{cuota}', [CuotasPHController::class, 'destroy'])->name('cuotasPH.destroy');

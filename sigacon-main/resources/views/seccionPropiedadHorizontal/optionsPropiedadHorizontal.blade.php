@@ -27,12 +27,12 @@
 
         <tr>
             <td class="border-b hover:underline">
-                <a href="{{ url('/cuotas') }}">1- Crear editar Cuotas de Administración</a>
+                <a href="{{ url('/conceptos') }}">1- Administrar Conceptos</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="{{ url('/cuotasavailables') }}">2- Asignar Cuota de Administración</a>
+                <a href="{{ url('/cuotasPH') }}">2- Crear / Editar Cuotas</a>
             </td>
         </tr>
         <tr>
