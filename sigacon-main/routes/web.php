@@ -166,3 +166,4 @@ Route::post('/cuotasPH', [CuotasPHController::class, 'store'])->name('cuotasPH.s
 Route::get('/cuotasPH/{cuota}/editar', [CuotasPHController::class, 'edit'])->name('cuotasPH.edit');
 Route::put('/cuotasPH/{cuota}', [CuotasPHController::class, 'update'])->name('cuotasPH.update');
 Route::delete('/cuotasPH/{cuota}', [CuotasPHController::class, 'destroy'])->name('cuotasPH.destroy');
+route::get('/empresas/{empresaId}/unidades', [CuotasPHController::class, 'getUnidadesByEmpresa']);

@@ -13,7 +13,7 @@ class CuotasPHController extends Controller
     // Mostrar todas las cuotasPH
     public function index()
     {
-        $cuotasPH = CuotaPH::with('concepto')->get();
+        $cuotasPH = CuotaPH::with('concepto', 'unidades.empresa')->get();
         return view('superUsuario.propiedadHorizontal.cuotas.indexCuota', compact('cuotasPH'));
     }
 
@@ -22,44 +22,57 @@ class CuotasPHController extends Controller
     {
         $conceptos = Concepto::all();
         $empresas = Empresa::where('tipo_empresa', 'Propiedad Horizontal')->get();
-        return view('superUsuario.propiedadHorizontal.cuotas.createCuota', compact('conceptos', 'empresas'));
+        // Inicialmente no traemos unidades hasta que se seleccione una empresa
+        $unidades = [];
+    
+        return view('superUsuario.propiedadHorizontal.cuotas.createCuota', compact('conceptos', 'empresas', 'unidades'));
     }
 
-    // Guardar una nueva cuotaPH
+    //Filtrar unidades por empresa seleccionada
+        public function getUnidadesByEmpresa($empresaId)
+    {
+        $unidades = Unidad::where('empresa_id', $empresaId)->get();
+        return response()->json($unidades);
+    }
+
+    
+    //Guardar la nueva cuota
     public function store(Request $request)
     {
+        // Validar los datos de entrada
         $request->validate([
-            'concepto_id' => 'required|exists:conceptos,id',
+            'concepto_id' => 'required',
             'vrlIndividual' => 'required|numeric',
-            'tipo' => 'required|string',
-            'aNombreDe' => 'nullable|string|max:255',
+            'tipo' => 'required',
+            'aNombreDe' => 'required|string|max:255',
             'desde' => 'required|date',
-            'hasta' => 'nullable|date',
-            'observacion' => 'nullable|string|max:255',
-            'unidad_ids' => 'array',
-            'unidad_ids.*' => 'exists:unidades,id'
+            'hasta' => 'required|date',
+            'empresa_id' => 'required',
+            'unidad_ids' => 'required|array', // Asegúrate de que sea un array
+            'observacion' => 'nullable|string',
         ]);
-
-        // Crear la cuotaPH
-        $cuota = CuotaPH::create($request->only([
-            'concepto_id',
-            'vrlIndividual',
-            'tipo',
-            'aNombreDe',
-            'desde',
-            'hasta',
-            'observacion'
-        ]));
-
-        // Asignar la cuota a las unidades seleccionadas
+    
+        // Crear la cuota
+        $cuota = CuotaPH::create($request->all());
+    
+        // Asignar unidades a la cuota
         if ($request->has('unidad_ids')) {
             foreach ($request->unidad_ids as $unidadId) {
-                $cuota->unidades()->attach($unidadId);
+                if ($unidadId !== 'all') { // Ignorar la opción "Seleccionar Todas"
+                    $cuota->unidades()->attach($unidadId);
+                }
             }
         }
-
-        return redirect()->route('cuotasPH.index')->with('success', 'Cuota creada con éxito.');
+    
+        // Si se seleccionó "Seleccionar Todas", asigna todas las unidades
+        if (in_array('all', $request->unidad_ids)) {
+            $unidades = Unidad::where('empresa_id', $request->empresa_id)->pluck('id')->toArray();
+            $cuota->unidades()->attach($unidades);
+        }
+    
+        return redirect()->route('cuotasPH.index')->with('success', 'Cuota creada exitosamente.');
     }
+    
 
     // Mostrar formulario para editar una cuotaPH
     public function edit(CuotaPH $cuota)

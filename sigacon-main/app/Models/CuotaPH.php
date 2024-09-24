@@ -28,6 +28,12 @@ class CuotaPH extends Model
 
     public function unidades()
     {
-        return $this->hasMany(CuotaUnidad::class);
+        return $this->belongsToMany(Unidad::class, 'cuotas_unidad', 'cuotas_ph_id', 'unidad_id');
+    }    
+
+        public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, 'empresa_id');
     }
+
 }

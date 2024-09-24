@@ -37,7 +37,7 @@
     <!-- Cierre empresa rol -->
     <!-- Inicio acciones disponibles -->
     <div class="text-center">
-        <h1 class="text-black text-2xl text-bold">Acciones</h1>
+        <h1 class="text-black text-2xl font-bold">Acciones</h1>
     </div>
     @include('contador.viewActions')
     <!-- Fin acciones disponibles -->
