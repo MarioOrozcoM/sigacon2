@@ -81,6 +81,20 @@
         @endif
     </div>
 
+    @if (!empty($empresa_id))
+        <div class="flex justify-end mb-4">
+            <a href="{{ route('cuotasPH.export', ['empresa_id' => $empresa_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Exportar a Excel</a>
+        </div>
+    @endif
+
+
+<form action="{{ route('cuotasPH.import') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="file" required>
+    <button type="submit" class="btn btn-success">Importar desde Excel</button>
+</form>
+
+
     <!-- Inicio footer -->
     @include('includes.footer')
     <!-- Fin footer -->

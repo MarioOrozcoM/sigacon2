@@ -7,6 +7,9 @@ use App\Models\Concepto;
 use App\Models\Empresa;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
+use App\Exports\CuotaPHExport;
+use App\Imports\CuotaPHImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CuotasPHController extends Controller
 {
@@ -147,4 +150,28 @@ public function create(Request $request)
 
         return redirect()->route('cuotasPH.index')->with('success', 'Cuota eliminada con éxito.');
     }
+
+    public function export(Request $request)
+    {
+        $empresaId = $request->input('empresa_id'); // Asegúrate de pasar el ID de la empresa
+        $empresa = Empresa::find($empresaId); // Obtén la empresa por ID
+    
+        // Define el nombre del archivo
+        $nombreArchivo = 'cuotas_ph_' . $empresa->razon_social . '.xlsx'; // Asegúrate de sanitizar el nombre si es necesario
+    
+        return Excel::download(new CuotaPHExport($empresaId), $nombreArchivo);
+    }
+    
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        Excel::import(new CuotaPHImport, $request->file('file'));
+
+        return redirect()->route('cuotasPH.index')->with('success', 'Datos importados exitosamente.');
+    }
+
 }
