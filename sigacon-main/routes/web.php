@@ -161,9 +161,9 @@ Route::delete('/conceptos/{concepto}', [ConceptoController::class, 'destroy'])->
 
 //Rutas personalizadas para el controlador CuotasPHController
 Route::get('/cuotasPH', [CuotasPHController::class, 'index'])->name('cuotasPH.index');
-Route::get('/cuotasPH/crear', [CuotasPHController::class, 'create'])->name('cuotasPH.create');
 Route::post('/cuotasPH', [CuotasPHController::class, 'store'])->name('cuotasPH.store');
-Route::get('/cuotasPH/{cuota}/editar', [CuotasPHController::class, 'edit'])->name('cuotasPH.edit');
-Route::put('/cuotasPH/{cuota}', [CuotasPHController::class, 'update'])->name('cuotasPH.update');
-Route::delete('/cuotasPH/{cuota}', [CuotasPHController::class, 'destroy'])->name('cuotasPH.destroy');
-route::get('/empresas/{empresaId}/unidades', [CuotasPHController::class, 'getUnidadesByEmpresa']);
+Route::delete('cuotasPH/{cuota}', [CuotasPHController::class, 'destroy'])->name('cuotasPH.destroy');
+Route::get('/cuotasPH/create', [CuotasPHController::class, 'create'])->name('cuotasPH.create');
+Route::get('cuotasPH/{cuota}/edit', [CuotasPHController::class, 'edit'])->name('cuotasPH.edit');
+Route::put('cuotasPH/{cuota}', [CuotasPHController::class, 'update'])->name('cuotasPH.update');
+Route::get('/empresas/{empresaId}/unidades', [CuotasPHController::class, 'getUnidadesByEmpresa']);

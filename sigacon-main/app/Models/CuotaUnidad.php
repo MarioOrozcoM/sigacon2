@@ -9,7 +9,7 @@ class CuotaUnidad extends Model
 {
     use HasFactory;
 
-    protected $table = 'cuotasUnidad';
+    protected $table = 'cuotas_unidad';
 
     protected $fillable = [
         'cuota_ph_id',
@@ -18,7 +18,7 @@ class CuotaUnidad extends Model
 
     public function cuotaPH()
     {
-        return $this->belongsTo(CuotaPH::class, 'cuota_ph_id');
+        return $this->belongsTo(CuotaPH::class, 'cuotas_ph_id');
     }
 
     public function unidad()

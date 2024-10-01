@@ -23,7 +23,7 @@ class CuotaPH extends Model
 
     public function concepto()
     {
-        return $this->belongsTo(Concepto::class);
+        return $this->belongsTo(Concepto::class, 'concepto_id');
     }
 
     public function unidades()

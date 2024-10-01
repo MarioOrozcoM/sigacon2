@@ -32,12 +32,12 @@
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="{{ url('/cuotasPH') }}">2- Crear / Editar Cuotas</a>
+                <a href="{{ url('/cuotasPH') }}">2- Admin | Cuotas de Administración</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="{{ url('/revisar/empresas') }}">3- Administrar cuotas de Administración asignadas</a>
+                <a href="#">3- #</a>
             </td>
         </tr>
         <tr>
