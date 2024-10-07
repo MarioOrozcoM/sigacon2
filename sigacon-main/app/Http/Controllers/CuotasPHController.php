@@ -151,6 +151,7 @@ public function create(Request $request)
         return redirect()->route('cuotasPH.index')->with('success', 'Cuota eliminada con éxito.');
     }
 
+    //Exportar a excel las cuotas de la Copropiedad
     public function export(Request $request)
     {
         $empresaId = $request->input('empresa_id'); // Asegúrate de pasar el ID de la empresa
@@ -163,15 +164,25 @@ public function create(Request $request)
     }
     
 
+    // Importar archivo Excel para modificar los datos exportados anteriormente
     public function import(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:xlsx,csv',
+            'file' => 'required|mimes:xlsx,xls,csv',
+            'empresa_id' => 'required|exists:empresas,id',
         ]);
-
-        Excel::import(new CuotaPHImport, $request->file('file'));
-
-        return redirect()->route('cuotasPH.index')->with('success', 'Datos importados exitosamente.');
+    
+        $empresaId = $request->input('empresa_id');
+    
+        try {
+            Excel::import(new CuotaPHImport($empresaId), $request->file('file'));
+            return redirect()->back()->with('success', 'Las cuotas se han importado y actualizado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Error al importar el archivo: ' . $e->getMessage()]);
+        }
     }
+    
+
+    
 
 }

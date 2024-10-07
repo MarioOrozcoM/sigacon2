@@ -82,17 +82,28 @@
     </div>
 
     @if (!empty($empresa_id))
-        <div class="flex justify-end mb-4">
-            <a href="{{ route('cuotasPH.export', ['empresa_id' => $empresa_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Exportar a Excel</a>
+        <div class="flex justify-center mb-4 mt-6 gap-8">
+
+            <div>
+                <a href="{{ route('cuotasPH.export', ['empresa_id' => $empresa_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Exportar a Excel</a>
+            </div>
+
+            <!-- Formulario de importación sin necesidad de volver a seleccionar la empresa -->
+            <form action="{{ route('cuotasPH.import') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4">
+                @csrf
+                <!-- Campo oculto para enviar la empresa seleccionada -->
+                <input type="hidden" name="empresa_id" value="{{ $empresa_id }}">
+                
+                <!-- Campo para seleccionar el archivo de Excel -->
+                <input type="file" name="file" required class="mt-2">
+                
+                <!-- Botón de importar -->
+                <button type="submit" class="btn btn-success bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Importar desde Excel</button>
+            </form>
+
         </div>
     @endif
 
-
-<form action="{{ route('cuotasPH.import') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="file" required>
-    <button type="submit" class="btn btn-success">Importar desde Excel</button>
-</form>
 
 
     <!-- Inicio footer -->

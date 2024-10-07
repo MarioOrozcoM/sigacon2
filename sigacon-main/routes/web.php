@@ -168,4 +168,4 @@ Route::get('cuotasPH/{cuota}/edit', [CuotasPHController::class, 'edit'])->name('
 Route::put('cuotasPH/{cuota}', [CuotasPHController::class, 'update'])->name('cuotasPH.update');
 Route::get('/empresas/{empresaId}/unidades', [CuotasPHController::class, 'getUnidadesByEmpresa']);
 Route::get('/cuotasPH/export', [CuotasPHController::class, 'export'])->name('cuotasPH.export');
-Route::post('/cuotasPH/import', [CuotasPHController::class, 'import'])->name('cuotasPH.import');
+Route::post('/cuotas/import', [CuotasPHController::class, 'import'])->name('cuotasPH.import');
