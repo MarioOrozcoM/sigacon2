@@ -17,19 +17,18 @@
     </div>
 
     <div class="max-w-80rem mx-auto px-4"> <!-- Cambiar a max-w-80rem -->
-    <form action="{{ route('cuotasPH.index') }}" method="GET" class="mb-4">
-        <label for="empresa_id" class="mr-2">Selecciona una Empresa:</label>
-        <select name="empresa_id" id="empresa_id" required class="border p-2">
-            <option value="">Seleccione una empresa</option>
-            @foreach ($empresas as $empresa)
-                <option value="{{ $empresa->id }}" {{ $empresa_id == $empresa->id ? 'selected' : '' }}>
-                    {{ $empresa->razon_social }}
-                </option>
-            @endforeach
-        </select>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mostrar Unidades</button>
-    </form>
-
+        <form action="{{ route('cuotasPH.index') }}" method="GET" class="mb-4">
+            <label for="empresa_id" class="mr-2">Selecciona una Empresa:</label>
+            <select name="empresa_id" id="empresa_id" required class="border p-2">
+                <option value="">Seleccione una empresa</option>
+                @foreach ($empresas as $empresa)
+                    <option value="{{ $empresa->id }}" {{ $empresa_id == $empresa->id ? 'selected' : '' }}>
+                        {{ $empresa->razon_social }}
+                    </option>
+                @endforeach
+            </select>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mostrar Unidades</button>
+        </form>
 
         @if (!empty($empresa_id))
             <!-- Botón para crear cuota -->
@@ -41,10 +40,10 @@
 
         @if (!empty($unidades))
             <div class="flex">
-                <form action="{{ route('cuotasPH.updateValores') }}" method="POST" class="flex-grow">
+                <form action="{{ route('cuotasPH.update') }}" method="POST" class="flex-grow">
                     @csrf
                     @method('PUT')
-
+                    <input type="hidden" name="empresa_id" value="{{ $empresa_id }}">
                     <table class="table-auto w-full bg-white shadow-md rounded">
                         <thead>
                             <tr class="bg-gray-100">
@@ -63,7 +62,8 @@
                                         <td class="px-4 py-2">{{ optional($cuota->cuotaPH->concepto)->nombreConcepto ?? 'Sin concepto' }}</td>
                                         <td class="px-4 py-2">{{ $cuota->cuotaPH->tipo ?? 'Sin tipo de cuota' }}</td>
                                         <td class="px-4 py-2">
-                                            <input type="number" name="valores[{{ $cuota->id }}]" value="{{ $cuota->cuotaPH->vrlIndividual ?? '0' }}" class="border p-2 w-full text-center bg-gray-100" disabled>
+                                            <input type="number" name="valores[{{ $cuota->cuotaPH->id }}]" value="{{ $cuota->cuotaPH->vrlIndividual ?? '0' }}" class="border p-2 w-full text-center bg-gray-100" disabled>
+                                            <input type="hidden" name="cuota_id" value="{{ $cuota->cuotaPH->id }}"> <!-- Añadido para almacenar el ID de la cuota -->
                                         </td>
                                         <td class="px-4 py-2">
                                             {{ $cuota->cuotaPH->desde ??  'No definida' }} - {{ $cuota->cuotaPH->hasta ??  'No definida' }}

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CuotaPH;
-use App\Models\Concepto;
-use App\Models\Empresa;
 use App\Models\Unidad;
+use App\Models\CuotaPH;
+use App\Models\Empresa;
+use App\Models\Concepto;
+use App\Models\CuotaUnidad;
 use Illuminate\Http\Request;
 use App\Exports\CuotaPHExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -43,37 +44,32 @@ class CuotasPHController extends Controller
         return view('superUsuario.propiedadHorizontal.cuotas.indexCuota', compact('empresas', 'unidades', 'empresa_id', 'cuotasPH', 'cuotaEditar'));
     }
     
+    // Mostrar formulario para crear una nueva cuotaPH
+    public function create(Request $request)
+    {
+        $conceptos = Concepto::all();
+        $empresa_id = $request->input('empresa_id');
 
-// Mostrar formulario para crear una nueva cuotaPH
-public function create(Request $request)
-{
-    $conceptos = Concepto::all();
-    $empresa_id = $request->input('empresa_id');
+        // Verificar que se haya pasado un empresa_id
+        if (!$empresa_id) {
+            return redirect()->route('cuotasPH.index')->with('error', 'No se proporcionó una empresa.');
+        }
 
-    // Verificar que se haya pasado un empresa_id
-    if (!$empresa_id) {
-        return redirect()->route('cuotasPH.index')->with('error', 'No se proporcionó una empresa.');
+        $empresa = Empresa::findOrFail($empresa_id);
+        // Inicialmente no traemos unidades hasta que se seleccione una empresa
+        $unidades = [];
+
+        return view('superUsuario.propiedadHorizontal.cuotas.createCuota', compact('conceptos', 'empresa', 'unidades'));
     }
 
-    $empresa = Empresa::findOrFail($empresa_id);
-    // Inicialmente no traemos unidades hasta que se seleccione una empresa
-    $unidades = [];
-
-    return view('superUsuario.propiedadHorizontal.cuotas.createCuota', compact('conceptos', 'empresa', 'unidades'));
-}
-
-
-
-
-
-    //Filtrar unidades por empresa seleccionada
+    // Filtrar unidades por empresa seleccionada
     public function getUnidadesByEmpresa($empresaId)
     {
         $unidades = Unidad::where('empresa_id', $empresaId)->get();
         return response()->json($unidades);
     }
 
-    //Guardar la nueva cuota
+    // Guardar la nueva cuota
     public function store(Request $request)
     {
         // Validar los datos de entrada
@@ -108,49 +104,29 @@ public function create(Request $request)
         }
     
         return redirect()->route('cuotasPH.index', ['empresa_id' => $request->empresa_id])
-        ->with('success', 'Cuota creada exitosamente.');
-    }
-
-    // Mostrar formulario para editar una cuotaPH
-    public function edit(CuotaPH $cuota)
-    {
-        $conceptos = Concepto::all();
-        $empresa = Empresa::findOrFail($cuota->empresa_id);
-        // Trae las unidades asociadas a la empresa para seleccionar
-        $unidades = Unidad::where('empresa_id', $empresa->id)->get();
-        return view('superUsuario.propiedadHorizontal.cuotas.editCuota', compact('cuota', 'conceptos', 'empresa', 'unidades'));
+            ->with('success', 'Cuota creada exitosamente.');
     }
 
     // Actualizar una cuotaPH
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'concepto_id' => 'required',
-        'vrlIndividual' => 'required|numeric',
-        'tipo' => 'required',
-        'aNombreDe' => 'required|string|max:255',
-        'desde' => 'required|date',
-        'hasta' => 'required|date',
-        'empresa_id' => 'required',
-        'unidad_ids' => 'required|array',
-        'observacion' => 'nullable|string',
-    ]);
-
-    $cuota = CuotaPH::findOrFail($id);
-    $cuota->update($request->all());
-
-    // Sincronizar las unidades
-    $unidadIds = $request->unidad_ids;
-
-    if (in_array('all', $unidadIds)) {
-        $unidadIds = Unidad::where('empresa_id', $request->empresa_id)->pluck('id')->toArray();
+    public function update(Request $request)
+    {
+        $request->validate([
+            'valores' => 'required|array',
+            'valores.*' => 'numeric|min:0',
+        ]);
+    
+        foreach ($request->valores as $cuotaId => $valor) {
+            $cuotaPH = CuotaPH::findOrFail($cuotaId);
+            $cuotaPH->vrlIndividual = $valor;
+            $cuotaPH->save();
+        }
+    
+        // Redirigir a la misma vista con el ID de la empresa
+        return redirect()->route('cuotasPH.index', ['empresa_id' => $request->empresa_id])->with('success', 'Los cambios se han guardado correctamente.');
     }
-
-    $cuota->unidades()->sync($unidadIds);
-
-    return redirect()->route('cuotasPH.index')->with('success', 'Cuota actualizada exitosamente.');
-}
-
+    
+    
+    
 
     // Eliminar una cuotaPH
     public function destroy(CuotaPH $cuota)
@@ -160,9 +136,7 @@ public function create(Request $request)
         return redirect()->route('cuotasPH.index')->with('success', 'Cuota eliminada con éxito.');
     }
 
-
-
-    //Exportar a excel las cuotas de la Copropiedad
+    // Exportar a excel las cuotas de la Copropiedad
     public function export(Request $request)
     {
         $empresaId = $request->input('empresa_id'); // Asegúrate de pasar el ID de la empresa
@@ -173,9 +147,4 @@ public function create(Request $request)
     
         return Excel::download(new CuotaPHExport($empresaId), $nombreArchivo);
     }
-    
-    
-    
-    
-
 }
