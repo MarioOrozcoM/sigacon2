@@ -8,7 +8,6 @@ use App\Models\Empresa;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
 use App\Exports\CuotaPHExport;
-use App\Imports\CuotaPHImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CuotasPHController extends Controller
@@ -29,12 +28,21 @@ class CuotasPHController extends Controller
                             ->where('empresa_id', $empresa_id)
                             ->get();
         }
-
-        // Obtener todas las cuotas
+    
+        // Obtener las cuotas para mostrar en la tabla
         $cuotasPH = CuotaPH::with('concepto', 'unidades.empresa')->get();
-
-        return view('superUsuario.propiedadHorizontal.cuotas.indexCuota', compact('empresas', 'unidades', 'empresa_id', 'cuotasPH'));
+        
+        // Verificar si se está editando una cuota
+        $cuotaEditar = null;
+        $cuota_id = $request->input('cuota_id');
+        
+        if ($cuota_id) {
+            $cuotaEditar = CuotaPH::with('unidades')->findOrFail($cuota_id);
+        }
+    
+        return view('superUsuario.propiedadHorizontal.cuotas.indexCuota', compact('empresas', 'unidades', 'empresa_id', 'cuotasPH', 'cuotaEditar'));
     }
+    
 
 // Mostrar formulario para crear una nueva cuotaPH
 public function create(Request $request)
@@ -99,7 +107,8 @@ public function create(Request $request)
             $cuota->unidades()->attach($unidades);
         }
     
-        return redirect()->route('cuotasPH.index')->with('success', 'Cuota creada exitosamente.');
+        return redirect()->route('cuotasPH.index', ['empresa_id' => $request->empresa_id])
+        ->with('success', 'Cuota creada exitosamente.');
     }
 
     // Mostrar formulario para editar una cuotaPH
@@ -151,6 +160,8 @@ public function create(Request $request)
         return redirect()->route('cuotasPH.index')->with('success', 'Cuota eliminada con éxito.');
     }
 
+
+
     //Exportar a excel las cuotas de la Copropiedad
     public function export(Request $request)
     {
@@ -163,26 +174,8 @@ public function create(Request $request)
         return Excel::download(new CuotaPHExport($empresaId), $nombreArchivo);
     }
     
-
-    // Importar archivo Excel para modificar los datos exportados anteriormente
-    public function import(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv',
-            'empresa_id' => 'required|exists:empresas,id',
-        ]);
     
-        $empresaId = $request->input('empresa_id');
     
-        try {
-            Excel::import(new CuotaPHImport($empresaId), $request->file('file'));
-            return redirect()->back()->with('success', 'Las cuotas se han importado y actualizado correctamente.');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Error al importar el archivo: ' . $e->getMessage()]);
-        }
-    }
-    
-
     
 
 }
