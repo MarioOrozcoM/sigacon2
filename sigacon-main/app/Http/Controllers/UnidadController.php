@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Exports\UnidadExport;
 use App\Models\Unidad;
 use App\Models\Empresa;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UnidadController extends Controller
 {
@@ -108,4 +110,27 @@ class UnidadController extends Controller
 
         return redirect()->route('unidades.index')->with('success', 'Unidad eliminada exitosamente.');
     }
+
+
+    //Exportar a excel las unidades de la empresa seleccionada
+    public function export(Request $request)
+    {
+        $empresaId = $request->input('empresa_id'); // Asegúrate de pasar el ID de la empresa
+        $empresa = Empresa::find($empresaId); // Obtén la empresa por ID
+    
+        // Verifica si la empresa existe
+        if (!$empresa) {
+            return redirect()->back()->with('error', 'Empresa no encontrada.');
+        }
+    
+        // Sanitiza el nombre de la empresa para evitar caracteres inválidos en el nombre del archivo
+        $nombreEmpresa = preg_replace('/[^A-Za-z0-9_-]/', '', $empresa->razon_social);
+    
+        // Define el nombre del archivo
+        $nombreArchivo = 'unidades_' . $nombreEmpresa . '.xlsx';
+    
+        // Exporta el archivo usando Excel
+        return Excel::download(new UnidadExport($empresaId), $nombreArchivo);
+    }
+    
 }

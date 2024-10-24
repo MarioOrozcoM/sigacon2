@@ -31,10 +31,11 @@
         </form>
 
         @if (!empty($empresa_id))
-            <!-- Botón para crear cuota -->
+            <!-- Botones, crear, editar, exportar -->
             <div class="flex justify-between mb-4">
                 <a href="{{ route('cuotasPH.create', ['empresa_id' => $empresa_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Crear Cuota</a>
                 <button id="editar-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Editar Valores</button>
+                <a href="{{ route('cuotasPH.export', ['empresa_id' => $empresa_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Exportar a Excel</a>
             </div>
         @endif
 
@@ -111,13 +112,6 @@
         @endif
     </div>
 
-    @if (!empty($empresa_id))
-        <div class="flex justify-center mb-4 mt-6 gap-8">
-            <div>
-                <a href="{{ route('cuotasPH.export', ['empresa_id' => $empresa_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Exportar a Excel</a>
-            </div>
-        </div>
-    @endif
 
     <!-- Inicio footer -->
     @include('includes.footer')

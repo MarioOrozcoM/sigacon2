@@ -41,16 +41,17 @@
         </div>
     @endif
 
-    <!-- Botón para Crear Nueva Unidad -->
+    <!-- Botón para Crear Nueva Unidad y exportar a excel -->
     @if(request('empresa_id'))
-        <div class="text-center mt-4">
+        <div class="text-center mt-4 flex gap-6 justify-center">
             <a href="{{ route('unidades.create', ['empresa_id' => request('empresa_id')]) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Crear Nueva Unidad</a>
+            <a href="{{ route('unidades.export', ['empresa_id' => request('empresa_id')]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Exportar a Excel</a>
         </div>
     @endif
 
     <!-- Mostrar las Unidades de la Empresa Seleccionada -->
 <div class="overflow-x-auto px-4">
-    <table class="w-3/4 mx-auto mt-10 bg-white border border-gray-200 shadow-md">
+    <table id="unidadesTable" class="w-3/4 mx-auto mt-10 bg-white border border-gray-200 shadow-md">
         <thead>
             <tr class="bg-gray-100">
                 <th class="py-2 px-4 border-b text-left">Tipo de Unidad</th>
@@ -66,21 +67,15 @@
                     <tr class="hover:bg-gray-50">
                         <td class="py-2 px-4 border-b">{{ $unidad->tipoUnidad }}</td>
                         <td class="py-2 px-4 border-b">{{ $unidad->torreBloque }}</td>
-                        <td class="py-2 px-4 border-b">{{ $unidad->number }}</td>
-                        <td class="py-2 px-4 border-b">{{ $unidad->propietario }}</td>
+                        <td class="py-2 px-4 border-b unidad-number">{{ $unidad->number }}</td> <!-- Agrega la clase aquí -->
+                        <td class="py-2 px-4 border-b unidad-propietario">{{ $unidad->propietario }}</td> <!-- Agrega la clase aquí -->
                         <td class="py-2 px-4 border-b">
-                            <!-- Contenedor Flex con Separación entre los Botones -->
                             <div class="flex space-x-4">
-                                <!-- Botón para Editar la Unidad -->
                                 <a href="{{ route('unidades.edit', $unidad->id) }}" class="text-blue-500 hover:text-blue-700">Editar</a>
-
-                                <!-- Botón para Eliminar la Unidad con Confirmación -->
                                 <form action="{{ route('unidades.destroy', $unidad->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" 
-                                            class="text-red-500 hover:text-red-700"
-                                            onclick="return confirm('¿Estás seguro de eliminar esta unidad? Esta acción no se puede deshacer.')">
+                                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('¿Estás seguro de eliminar esta unidad? Esta acción no se puede deshacer.')">
                                         Eliminar
                                     </button>
                                 </form>
@@ -90,8 +85,10 @@
                 @endif
             @endforeach
         </tbody>
+
     </table>
 </div>
+
 
 
 

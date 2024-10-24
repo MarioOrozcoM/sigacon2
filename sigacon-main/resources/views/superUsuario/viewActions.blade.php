@@ -75,7 +75,7 @@
             </tr>
             <tr class="divide-x">
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline"></button></td>
-                <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline"></button></td>
+                <td class="px-6 py-4"><button onclick="window.location.href = '/opciones_facturas';" class="hover:underline">Facturación</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline"></button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">Descuentos Especiales</button></td>
                 <td class="px-6 py-4"><button onclick="window.location.href = '#';" class="hover:underline">""</button></td>

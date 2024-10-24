@@ -82,6 +82,11 @@ Route::get('/adminCopropiedades', function (){
     return view('superUsuario.copropiedades.adminCopropiedades');
 });
 
+//VIsta de Facturación principal
+Route::get('/opciones_facturas', function (){
+    return view('facturacion.indexFacturacion');
+});
+
 
 
 
@@ -152,6 +157,7 @@ Route::post('/unidades', [UnidadController::class, 'store'])->name('unidades.sto
 Route::get('/unidades/{unidad}/edit', [UnidadController::class, 'edit'])->name('unidades.edit');
 Route::put('/unidades/{unidad}', [UnidadController::class, 'update'])->name('unidades.update');
 Route::delete('/unidades/{unidad}', [UnidadController::class, 'destroy'])->name('unidades.destroy');
+Route::get('/unidades/export', [UnidadController::class, 'export'])->name('unidades.export');
 
 //Rutas personalizadas para el controlador ConceptoController
 Route::get('/conceptos', [ConceptoController::class, 'index'])->name('conceptos.index');
@@ -160,8 +166,8 @@ Route::post('/conceptos', [ConceptoController::class, 'store'])->name('conceptos
 Route::delete('/conceptos/{concepto}', [ConceptoController::class, 'destroy'])->name('conceptos.destroy');
 
 
-// Rutas personalizadas para el controlador CuotasPHController
 
+// Rutas personalizadas para el controlador CuotasPHController
 // Ruta para listar las cuotas y seleccionar una empresa para mostrar sus unidades
 Route::get('/cuotasPH', [CuotasPHController::class, 'index'])->name('cuotasPH.index');
 
