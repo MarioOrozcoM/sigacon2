@@ -7,84 +7,60 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Función que muestra la vista de logados o la vista con el formulario de Login
-    public function index()
+    // Método para mostrar el formulario de login
+    public function showLoginForm()
     {
-        // Comprobamos si el usuario ya está logado
+        // Verificar si el usuario ya está autenticado
         if (Auth::check()) {
-            // Si está logado le mostramos la vista de logados
-            return view('logados');
+            return redirect()->route('logados'); // Si está autenticado, redirigir a la vista logados
         }
-    
-        // Si no está logado le mostramos la vista con el formulario de login
-        return view('inicio_sesion');
-    }
-    
-    // Función que se encarga de recibir los datos del formulario de login, comprobar que el usuario existe y en caso correcto logar al usuario
-    // Función que se encarga de recibir los datos del formulario de login, comprobar que el usuario existe y en caso correcto logar al usuario
-public function login(Request $request)
-{
-    // Comprobamos que el email y la contraseña han sido introducidos
-    $request->validate([
-        'email' => 'required',
-        'password' => 'required',
-    ]);
 
-    // Almacenamos las credenciales de email y contraseña
-    $credentials = $request->only('email', 'password');
-
-    // Si el usuario existe y está activo, lo logamos y lo llevamos a la vista de "logados" con un mensaje
-    if (Auth::attempt($credentials) && Auth::user()->active) {
-        return redirect()->route('logados')->withSuccess('Logado Correctamente');
+        return view('inicio_sesion'); // Mostrar la vista de login si no está autenticado
     }
 
-    // Si el usuario no existe o no está activo, devolvemos al usuario al formulario de login con un mensaje de error
-    return redirect("/")->withErrors(['email' => 'Los datos introducidos no son correctos o tu cuenta está deshabilitada']);
-}
+    // Función para manejar el inicio de sesión
+    public function login(Request $request)
+    {
+        // Validar los datos del formulario de inicio de sesión
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
 
-    
-    private function getUserData() {
-        if (Auth::check()) {
-            return Auth::user();
+        // Obtener las credenciales
+        $credentials = $request->only('email', 'password');
+
+        // Intentar autenticar al usuario
+        if (Auth::attempt($credentials) && Auth::user()->active) {
+            return redirect()->route('logados')->withSuccess('Logado Correctamente');
         }
-        return null;
+
+        // Si fallan las credenciales, redirigir con un mensaje de error
+        return redirect("/login")->withErrors(['email' => 'Los datos introducidos no son correctos o tu cuenta está deshabilitada']);
     }
 
-    // Función que muestra la vista de logados si el usuario está logado y si no le devuelve al formulario de login con un mensaje de error
+    // Función para mostrar la vista de logados
     public function logados()
     {
         $user = Auth::user();
-        return view('logados', ['user' => $user]); //Variable para que el nombre del usuario aparezca cuando se loguea
         if (Auth::check()) {
-            return view('logados');
+            return view('logados', ['user' => $user]);
         }
-    
-        return redirect("/")->withSuccess('No tienes acceso, por favor inicia sesión');
+
+        return redirect("/login")->withErrors('No tienes acceso, por favor inicia sesión');
     }
 
     // Función para mostrar la vista principal
-    public function main()  //es para que la variable $user funcione en main.blade
+    public function main()
     {
-        // Obtenemos la información del usuario
-        $user = $this->getUserData();
-    
-        // Retornamos la vista principal y pasamos la información del usuario a la vista
+        $user = Auth::user();
         return view('main', ['user' => $user]);
     }
-    // public function adminUsers()
-    // {
-    //     $user = $this->getUserData();
 
-    //     return view('superUsuario.adminUsers', ['user' => $user]);
-    // }
-
-      public function rol()
-      {
-        $user = $this->getUserData();
-
+    // Función para mostrar la vista con el rol del usuario
+    public function rol()
+    {
+        $user = Auth::user();
         return view('includes.show_rol', ['user' => $user]);
-      }
-
     }
-
-
+}

@@ -93,7 +93,12 @@ Route::get('/opciones_facturas', function (){
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // Route::get('/', [AuthController::class, 'index'])->name('home');
-Route::post('/login', [AuthController::class, 'login'])->name('login'); // Ruta para el inicio de sesión
+// Ruta para mostrar el formulario de login
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+
+// Ruta para manejar el envío del formulario de login
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
 Route::get('/logados', [AuthController::class, 'logados'])->name('logados'); // Ruta para la página después de iniciar sesión
 
 // Rutas para el cambio de contraseña
