@@ -27,7 +27,7 @@
 
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">1- Copropiedades</a>
+                <a href="/facturacion">1- Copropiedades</a>
             </td>
         </tr>
         <tr>

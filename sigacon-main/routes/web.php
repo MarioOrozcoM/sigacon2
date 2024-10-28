@@ -10,6 +10,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\ConceptoController;
 use App\Http\Controllers\CuotasPHController;
+use App\Http\Controllers\FacturaCopropiedadController;
 
 use App\Models\Unidad;
 
@@ -193,3 +194,8 @@ Route::get('/empresas/{empresaId}/unidades', [CuotasPHController::class, 'getUni
 
 // Ruta para exportar a Excel las cuotas de una empresa seleccionada
 Route::get('/cuotasPH/export', [CuotasPHController::class, 'export'])->name('cuotasPH.export');
+
+
+//RUTAS FACTURACIÓN COPROPIEDAD
+Route::get('/facturacion', [FacturaCopropiedadController::class, 'seleccionarEmpresa'])->name('facturas.seleccionar');
+Route::post('/facturacion/generar', [FacturaCopropiedadController::class, 'generarFactura'])->name('facturas.generar');

@@ -17,7 +17,7 @@
 </div>
 
     <!-- Selector de Empresa -->
-    <form action="{{ route('factura.seleccionarEmpresa') }}" method="GET" class="flex justify-center mb-4">
+    <form action="{{ route('facturas.seleccionar') }}" method="GET" class="flex justify-center mb-4">
         <label for="empresa_id" class="mr-2">Selecciona una Empresa:</label>
         <select name="empresa_id" id="empresa_id" class="border p-2">
             <option value="">Seleccione una empresa</option>
@@ -33,7 +33,7 @@
 
     <!-- Mostrar Cuotas Asignadas -->
     @if (!empty($cuotas))
-        <form action="{{ route('factura.generar') }}" method="POST">
+        <form action="{{ route('facturas.generar') }}" method="POST">
             @csrf
             <input type="hidden" name="empresa_id" value="{{ request('empresa_id') }}">
 
