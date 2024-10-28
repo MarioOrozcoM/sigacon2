@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Unidad;
 use App\Models\CuotaPH;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
@@ -14,15 +15,22 @@ class FacturaCopropiedadController extends Controller
     {
         $empresas = Empresa::where('tipo_empresa', 'Propiedad Horizontal')->get();
         $empresaId = $request->input('empresa_id');
+        
         $cuotas = [];
         if ($empresaId) {
-            $cuotas = CuotaPH::whereHas('unidades', function ($query) use ($empresaId) {
-                $query->where('empresa_id', $empresaId);
-            })->get();
+            // Filtrar cuotas por las unidades de la empresa seleccionada
+            $cuotas = CuotaPH::with(['concepto', 'unidades' => function ($query) use ($empresaId) {
+                    $query->where('empresa_id', $empresaId);
+                }])
+                ->whereHas('unidades', function ($query) use ($empresaId) {
+                    $query->where('empresa_id', $empresaId);
+                })
+                ->get();
         }
         
         return view('facturacion.copropiedades.facturar', compact('empresas', 'cuotas'));
     }
+
 
     // Genera la factura en PDF
     public function generarFactura(Request $request)
@@ -44,7 +52,7 @@ class FacturaCopropiedadController extends Controller
             'total' => $cuotas->sum('vrlIndividual'),
             'valor_en_letras' => $this->convertirNumeroALetras($cuotas->sum('vrlIndividual')),
             'cuenta_bancaria' => 'Davivienda APP N° 1663 6999 9676',
-            'correo_pago' => 'contabilidad.sanjeronimo@gmail.com',
+            'correo_pago' => 'sigaconsas@gmail.com',
         ];
 
         $pdf = Pdf::loadView('facturacion.copropiedades.factura_pdf', compact('facturaData'));
@@ -54,6 +62,6 @@ class FacturaCopropiedadController extends Controller
     // Convierte el valor numérico a letras
     private function convertirNumeroALetras($numero)
     {
-        return 'mil ' . number_format($numero, 2, ',', '.'); // Ejemplo básico
+        return 'mil ' . number_format($numero, 3, ',', '.'); // Ejemplo básico
     }
 }

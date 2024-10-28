@@ -20,7 +20,7 @@
             <p>Fecha de vencimiento: {{ $facturaData['fecha_vencimiento'] }}</p>
         </div>
 
-        <h3>Empresa: {{ $facturaData['empresa']->razon_social }}</h3>
+        <h3>Conjunto Residencial: {{ $facturaData['empresa']->razon_social }}</h3>
 
         <table class="table">
             <thead>
@@ -33,14 +33,14 @@
                 @foreach($facturaData['cuotas'] as $cuota)
                     <tr>
                         <td>{{ $cuota->concepto->nombreConcepto }}</td>
-                        <td>${{ number_format($cuota->vrlIndividual, 2) }}</td>
+                        <td>${{ number_format($cuota->vrlIndividual, 3) }}</td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <td>Total</td>
-                    <td>${{ number_format($facturaData['total'], 2) }}</td>
+                    <td>${{ number_format($facturaData['total'], 3) }}</td>
                 </tr>
             </tfoot>
         </table>

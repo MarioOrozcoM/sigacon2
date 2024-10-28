@@ -8,17 +8,17 @@
 </head>
 <body class="flex flex-col min-h-screen">
 
-<!-- Inicio navegación superior -->
-@include('includes.header_redirect_main')
-<!-- Fin navegación superior -->
+    <!-- Inicio navegación superior -->
+    @include('includes.header_redirect_main')
+    <!-- Fin navegación superior -->
 
-<div class="text-center my-6">
+    <div class="text-center my-6">
         <h1 class="font-bold text-2xl text-black">Generar Factura para Propiedad Horizontal</h1>
-</div>
+    </div>
 
     <!-- Selector de Empresa -->
-    <form action="{{ route('facturas.seleccionar') }}" method="GET" class="flex justify-center mb-4">
-        <label for="empresa_id" class="mr-2">Selecciona una Empresa:</label>
+    <form action="{{ route('facturas.seleccionar') }}" method="GET" class="flex justify-center items-center gap-4 mb-4">
+        <label for="empresa_id" class="text-lg">Selecciona una Empresa:</label>
         <select name="empresa_id" id="empresa_id" class="border p-2">
             <option value="">Seleccione una empresa</option>
             @foreach ($empresas as $empresa)
@@ -37,25 +37,31 @@
             @csrf
             <input type="hidden" name="empresa_id" value="{{ request('empresa_id') }}">
 
-            <table class="table-auto w-full bg-white shadow-md rounded">
+            <!-- Tabla para mostrar cuotas con tamaño reducido -->
+            <table class="table-auto w-full max-w-3xl bg-white shadow-md rounded mx-auto mt-2">
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2">Seleccionar</th>
                         <th class="px-4 py-2">Concepto</th>
                         <th class="px-4 py-2">Tipo de Cuota</th>
-                        <th class="px-4 py-2">Valor</th>
+                        <th class="px-4 py-2">Unidad</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($cuotas as $cuota)
-                        <tr class="border-t">
-                            <td class="px-4 py-2">
-                                <input type="checkbox" name="cuotas[]" value="{{ $cuota->id }}">
-                            </td>
-                            <td class="px-4 py-2">{{ optional($cuota->concepto)->nombreConcepto ?? 'Sin concepto' }}</td>
-                            <td class="px-4 py-2">{{ $cuota->tipo }}</td>
-                            <td class="px-4 py-2">{{ number_format($cuota->vrlIndividual, 2) }}</td>
-                        </tr>
+                        @foreach ($cuota->unidades as $unidad)
+                            <tr class="border-t">
+                                <td class="px-4 py-2">
+                                    <input type="checkbox" name="cuotas[]" value="{{ $cuota->id }}">
+                                </td>
+                                <td class="px-4 py-2">{{ optional($cuota->concepto)->nombreConcepto ?? 'Sin concepto' }}</td>
+                                <td class="px-4 py-2">{{ $cuota->tipo }}</td>
+                                <td class="px-4 py-2">
+                                    {{ $unidad->tipoUnidad ?? 'Sin tipo' }} {{ $unidad->number ?? 'Sin número' }}  - 
+                                    {{ $unidad->torreBloque ? 'Torre/Bloque ' . $unidad->torreBloque : '' }}
+                                </td>
+                            </tr>
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>
@@ -69,11 +75,9 @@
         <p class="text-center">Seleccione una empresa para ver las cuotas asignadas.</p>
     @endif
 
+    <!-- Inicio Footer -->
+    @include('includes.footer')
+    <!-- Cierre Footer -->
 
-
-<!-- Inicio Footer -->
-@include('includes.footer')
-<!-- Cierre Footer -->
-    
 </body>
 </html>

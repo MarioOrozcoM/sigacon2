@@ -27,12 +27,12 @@
 
         <tr>
             <td class="border-b hover:underline">
-                <a href="/facturacion">1- Copropiedades</a>
+                <a href="#">1- Administrar Cuentas Bancarias</a>
             </td>
         </tr>
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">2- #</a>
+                <a href="/facturacion">2- Copropiedades</a>
             </td>
         </tr>
         <tr>
