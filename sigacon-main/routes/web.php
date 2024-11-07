@@ -11,6 +11,7 @@ use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\ConceptoController;
 use App\Http\Controllers\CuotasPHController;
 use App\Http\Controllers\FacturaCopropiedadController;
+use App\Http\Controllers\EmpresaDetalleController;
 
 use App\Models\Unidad;
 
@@ -199,3 +200,12 @@ Route::get('/cuotasPH/export', [CuotasPHController::class, 'export'])->name('cuo
 //RUTAS FACTURACIÓN COPROPIEDAD
 Route::get('/facturacion', [FacturaCopropiedadController::class, 'seleccionarEmpresa'])->name('facturas.seleccionar');
 Route::post('/facturacion/generar', [FacturaCopropiedadController::class, 'generarFactura'])->name('facturas.generar');
+
+
+//RUTAS CORREO COMPROBANTE Y N° CUENTA BANCARIA DE EMPRESA
+Route::get('/empresa-detalles', [EmpresaDetalleController::class, 'index'])->name('empresa_detalles.index');
+Route::get('/empresa-detalles/create/{empresa}', [EmpresaDetalleController::class, 'create'])->name('empresa_detalles.create');
+Route::post('/empresa-detalles/store/{empresa}', [EmpresaDetalleController::class, 'store'])->name('empresa_detalles.store');
+Route::get('/empresa-detalles/{id}/edit', [EmpresaDetalleController::class, 'edit'])->name('empresa_detalles.edit');
+Route::put('/empresa-detalles/{id}', [EmpresaDetalleController::class, 'update'])->name('empresa_detalles.update');
+Route::delete('/empresa-detalles/{id}', [EmpresaDetalleController::class, 'destroy'])->name('empresa_detalles.destroy');

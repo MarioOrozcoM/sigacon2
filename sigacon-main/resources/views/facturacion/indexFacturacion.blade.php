@@ -27,7 +27,7 @@
 
         <tr>
             <td class="border-b hover:underline">
-                <a href="#">1- Administrar Cuentas Bancarias</a>
+                <a href="/empresa-detalles">1- Administrar Cuentas Bancarias y Correo</a>
             </td>
         </tr>
         <tr>

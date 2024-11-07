@@ -54,5 +54,10 @@ class Empresa extends Model
     return $this->hasMany(Unidad::class); // Ajusta esto según tu relación
 }
 
+public function detalle()
+{
+    return $this->hasOne(EmpresaDetalle::class);
+}
+
 
 }
