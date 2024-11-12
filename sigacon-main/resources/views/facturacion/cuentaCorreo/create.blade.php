@@ -24,7 +24,7 @@
             <input type="email" name="correoFactura" id="correoFactura" class="w-full border p-2 rounded" required placeholder="ejemplo@correo.com">
         </div>
         <div class="mb-4">
-            <label for="cuentaBanco" class="block font-medium mb-1">N° de Cuenta Bancaria</label>
+            <label for="cuentaBanco" class="block font-medium mb-1">N° de Cuenta Bancaria (Banco, Tipo y N°)</label>
             <input type="text" name="cuentaBanco" id="cuentaBanco" class="w-full border p-2 rounded" required placeholder="Número de cuenta">
         </div>
         <div class="text-center">

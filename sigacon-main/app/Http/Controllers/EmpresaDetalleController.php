@@ -9,11 +9,20 @@ use Illuminate\Http\Request;
 class EmpresaDetalleController extends Controller
 {
     // Muestra el índice para seleccionar una empresa
-    public function index()
+    public function index(Request $request)
     {
         $empresas = Empresa::all();
-        return view('facturacion.cuentaCorreo.index', compact('empresas'));
+        $empresaSeleccionada = null;
+        $detalles = null;
+    
+        if ($request->has('empresa_id')) {
+            $empresaSeleccionada = Empresa::with('detalle')->find($request->input('empresa_id'));
+            $detalles = $empresaSeleccionada ? $empresaSeleccionada->detalle : null;
+        }
+    
+        return view('facturacion.cuentaCorreo.index', compact('empresas', 'empresaSeleccionada', 'detalles'));
     }
+    
 
     // Muestra el formulario para crear detalles de la empresa
     public function create($empresaId)
@@ -26,25 +35,29 @@ class EmpresaDetalleController extends Controller
     public function store(Request $request, $empresaId)
     {
         $request->validate([
-            'correo_factura' => 'required|email',
-            'cuenta_banco' => 'required|string|max:255',
+            'correoFactura' => 'required|email',
+            'cuentaBanco' => 'required|string|max:255',
         ]);
-
+    
         EmpresaDetalle::create([
             'empresa_id' => $empresaId,
-            'correoFactura' => $request->input('correoFactura'),
-            'cuentaBanco' => $request->input('cuentaBanco'),
+            'correo_factura' => $request->input('correoFactura'), // Cambiado de correoFactura a correo_factura
+            'cuenta_banco' => $request->input('cuentaBanco'), // Cambiado de cuentaBanco a cuenta_banco
         ]);
-
-        return redirect()->route('facturacion.cuentaCorreo.index')->with('success', 'Detalles de la empresa creados correctamente.');
+    
+        return redirect()->route('empresa_detalles.index')->with('success', 'Detalles de la empresa creados correctamente.');
     }
+    
+    
 
     // Muestra el formulario para editar los detalles de la empresa
     public function edit($id)
     {
         $detalle = EmpresaDetalle::findOrFail($id);
-        return view('facturacion.cuentaCorreo.edit', compact('detalle'));
+        $empresa = $detalle->empresa; // Obtenemos la empresa relacionada con los detalles
+        return view('facturacion.cuentaCorreo.edit', compact('detalle', 'empresa'));
     }
+    
 
     // Actualiza los detalles de la empresa
     public function update(Request $request, $id)
@@ -53,19 +66,27 @@ class EmpresaDetalleController extends Controller
             'correoFactura' => 'required|email',
             'cuentaBanco' => 'required|string|max:255',
         ]);
-
+    
         $detalle = EmpresaDetalle::findOrFail($id);
-        $detalle->update($request->all());
-
-        return redirect()->route('facturacion.cuentaCorreo.index')->with('success', 'Detalles de la empresa actualizados correctamente.');
+    
+        // Asignar explícitamente los campos del formulario a los campos en la base de datos
+        $detalle->correo_factura = $request->input('correoFactura');
+        $detalle->cuenta_banco = $request->input('cuentaBanco');
+        $detalle->save();
+    
+        return redirect()->route('empresa_detalles.index')->with('success', 'Detalles de la empresa actualizados correctamente.');
     }
+    
 
     // Elimina los detalles de la empresa
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $detalle = EmpresaDetalle::findOrFail($id);
+        $empresaId = $detalle->empresa_id; // Guardar la empresa asociada antes de eliminar
         $detalle->delete();
-
-        return redirect()->route('facturacion.cuentaCorreo.index')->with('success', 'Detalles de la empresa eliminados correctamente.');
+    
+        return redirect()->route('empresa_detalles.index', ['empresa_id' => $empresaId])
+            ->with('success', 'Detalles de la empresa eliminados correctamente.');
     }
+    
 }

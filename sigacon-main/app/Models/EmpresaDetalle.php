@@ -12,8 +12,8 @@ class EmpresaDetalle extends Model
     protected $table = 'empresa_detalles';
 
     protected $fillable = [
-        'correoFactura',
-        'cuentaBanco',
+        'correo_factura',
+        'cuenta_banco',
         'empresa_id', // Este campo será la clave foránea para la relación
     ];
 

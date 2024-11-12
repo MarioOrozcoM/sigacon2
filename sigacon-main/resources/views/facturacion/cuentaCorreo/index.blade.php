@@ -31,18 +31,13 @@
     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mostrar Detalles</button>
 </form>
 <!-- ... -->
-@if(request('empresa_id'))
+@if($empresaSeleccionada)
     <div class="max-w-4xl mx-auto mt-4 bg-white p-4 rounded shadow">
-        @php
-            $empresaSeleccionada = $empresas->find(request('empresa_id'));
-            $detalles = $empresaSeleccionada->detalles; // Asegúrate de tener esta relación en tu modelo
-        @endphp
-
         <h2 class="text-xl font-semibold mb-4">Empresa: {{ $empresaSeleccionada->razon_social }}</h2>
 
         @if ($detalles)
-            <p><strong>Correo de Factura:</strong> {{ $detalles->correoFactura }}</p>
-            <p><strong>N° de Cuenta Bancaria:</strong> {{ $detalles->cuentaBanco }}</p>
+            <p><strong>Correo de Factura:</strong> {{ $detalles->correo_factura }}</p>
+            <p><strong>Cuenta Bancaria:</strong> {{ $detalles->cuenta_banco }}</p>
             <div class="mt-4">
                 <a href="{{ route('empresa_detalles.edit', $detalles->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Editar</a>
                 <form action="{{ route('empresa_detalles.destroy', $detalles->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de eliminar estos detalles?');">
@@ -53,10 +48,11 @@
             </div>
         @else
             <p class="mb-4">No se han registrado detalles para esta empresa.</p>
-            <a href="{{ route('empresa_detalles.create', request('empresa_id')) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">Crear Detalles</a>
+            <a href="{{ route('empresa_detalles.create', $empresaSeleccionada->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">Crear Detalles</a>
         @endif
     </div>
 @endif
+
 </div>
 
 <!-- Inicio Footer -->
