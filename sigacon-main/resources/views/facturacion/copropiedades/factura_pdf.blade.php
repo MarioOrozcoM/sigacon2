@@ -16,10 +16,13 @@
         }
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin: 0;
         }
         .header h2 {
             margin: 10px 0;
+        }
+        .header h3 {
+            margin: 5px 0;
         }
         .logo {
             max-width: 150px;
@@ -30,17 +33,13 @@
         .factura-datos {
             display: inline-block;
             text-align: right;
-            margin-left: 8rem; /* Aumento el espacio entre el logo y la información de la factura */
+            margin-left: 8rem;
             vertical-align: top;
         }
         .factura-datos p {
             margin: 5px 0;
         }
-        .unidad-info, .observaciones {
-            /* margin-top: 5px; Reducción del margen entre el logo y la unidad */
-        }
-        .unidad-info p, .observaciones p {
-            /* margin-top: 10px; */
+        .unidad-info p {
             margin: 5px 0;
         }
         .table {
@@ -70,13 +69,14 @@
         <!-- Título de la factura -->
         <div class="header">
             <h3>Conjunto Residencial: {{ $facturaData['empresa']->razon_social }}</h3>
+            <h3>Nit: {{ $facturaData['empresa']->numero_identificacion }}</h3>
         </div>
 
-        <!-- Logo a la izquierda y datos de la factura a la derecha -->
+        <!-- Logo e información de la factura -->
         <div class="header">
             <div class="logo">
                 @if(!empty($empresa->logo))
-                    <img src="{{ public_path('images/' . basename($empresa->logo)) }}" alt="Logo de la empresa" class="h-16 w-auto" style="max-width: 150px;">
+                    <img src="{{ public_path('images/' . basename($empresa->logo)) }}" alt="Logo de la empresa" style="max-width: 150px;">
                 @else
                     <p>No se encontró el logo de la empresa.</p>
                 @endif
@@ -89,31 +89,37 @@
             </div>
         </div>
 
-        <!-- Información de la unidad (incluye torre/bloque) -->
+        <!-- Información de la unidad -->
         <div class="unidad-info">
             <p><strong>Unidad:</strong> {{ $facturaData['detalle_cuotas'][0]['tipoUnidad'] }}  {{ $facturaData['detalle_cuotas'][0]['number'] }} - {{ $facturaData['detalle_cuotas'][0]['torreBloque'] ? 'Torre/Bloque ' . $facturaData['detalle_cuotas'][0]['torreBloque'] : '' }}</p>
             <p><strong>A nombre de:</strong> {{ $facturaData['detalle_cuotas'][0]['aNombreDe'] }}</p>
-            <p><strong>Descripción:</strong> {{ $facturaData['detalle_cuotas'][0]['observacion'] }}</p>
+            @if(count($facturaData['cuotas']) === 1)
+                <p><strong>Descripción:</strong> {{ $facturaData['detalle_cuotas'][0]['observacion'] }}</p>
+            @endif
         </div>
 
-        <!-- Tabla de conceptos, valores y total -->
+        <!-- Tabla de conceptos y valores -->
         <table class="table">
             <thead>
                 <tr>
                     <th>Concepto</th>
                     <th>Valor</th>
-                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($facturaData['cuotas'] as $index => $cuota)
+                @foreach($facturaData['cuotas'] as $cuota)
                     <tr>
                         <td>{{ $cuota->concepto->nombreConcepto ?? 'Sin concepto' }}</td>
                         <td>${{ number_format($cuota->vrlIndividual, 3) }}</td>
-                        <td>${{ number_format($facturaData['total'], 3) }}</td>
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>${{ number_format($facturaData['total'], 3) }}</strong></td>
+                </tr>
+            </tfoot>
         </table>
 
         <!-- Total en letras, cuenta bancaria y soporte -->

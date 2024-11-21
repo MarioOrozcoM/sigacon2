@@ -73,7 +73,9 @@ class FacturaCopropiedadController extends Controller
             })->all(), // Convierte la colección a un array
             'logo' => $empresa->logo, // Agregamos el logo de la empresa 
         ];
+        $altura = 841.89 + (count($facturaData['cuotas']) - 10) * 30;
         $pdf = Pdf::loadView('facturacion.copropiedades.factura_pdf', compact('facturaData', 'empresa'));
+        $pdf->setPaper([0, 0, 595.28, $altura]);
 
         return $pdf->download('factura_' . $empresa->razon_social . '.pdf');
 
