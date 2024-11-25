@@ -46,6 +46,7 @@ class Empresa extends Model
         'observaciones',
         'logo',
         'tamano_empresa',
+        'physical_address',
 
     ];
     

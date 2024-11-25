@@ -70,6 +70,7 @@
         <div class="header">
             <h3>Conjunto Residencial: {{ $facturaData['empresa']->razon_social }}</h3>
             <h3>Nit: {{ $facturaData['empresa']->numero_identificacion }}</h3>
+            <h3>Dirección Física: {{ $facturaData['empresa']->physical_address }}</h3>
         </div>
 
         <!-- Logo e información de la factura -->

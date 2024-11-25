@@ -21,7 +21,7 @@
             @csrf
             <h2 class="text-xl font-semibold text-center mt-4">Datos Empresa</h2>
             <div class="mb-4">
-                <label for="codigo_empresa" class="block text-gray-700 text-sm font-bold mb-2">Código Empresa:</label>
+                <label for="codigo_empresa" class="block text-gray-700 text-sm font-bold mb-2">Nit:</label>
                 <input type="text" id="codigo_empresa" name="codigo_empresa" value="{{ old('codigo_empresa') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
             </div>
             <div class="mb-4">
@@ -70,6 +70,10 @@
             <div class="mb-4">
                 <label for="nombre_comercial" class="block text-gray-700 text-sm font-bold mb-2">Nombre Comercial:</label>
                 <input type="text" id="nombre_comercial" name="nombre_comercial" value="{{ old('nombre_comercial') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
+            </div>
+            <div class="mb-4">
+                <label for="physical_address" class="block text-gray-700 text-sm font-bold mb-2">Dirección Física:</label>
+                <input type="text" id="physical_address" name="physical_address" value="{{ old('physical_address') }}"  class="border border-gray-400 rounded-md py-2 px-3 w-full">
             </div>
             <h2 class="text-xl font-semibold text-center mt-4">Representante Legal</h2>
             <div class="mb-4">

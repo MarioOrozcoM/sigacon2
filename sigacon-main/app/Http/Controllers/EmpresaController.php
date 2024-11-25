@@ -65,6 +65,7 @@ class EmpresaController extends Controller
         'observaciones' => 'nullable|string|max:250',
         'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'tamano_empresa' => 'nullable|string|in:Grande,Mediana,Pequeña,Micro',
+        'physical_address' => 'nullable|string|max:100',
         ]);
 
         $data = $request->all();
@@ -140,6 +141,7 @@ class EmpresaController extends Controller
         'observaciones' => 'nullable|string|max:250',
         'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'tamano_empresa' => 'nullable|string|in:Grande,Mediana,Pequeña,Micro',
+        'physical_address' => 'nullable|string|max:100',
 
         ]);
 
