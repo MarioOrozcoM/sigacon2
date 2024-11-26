@@ -101,4 +101,117 @@ class FacturaCopropiedadController extends Controller
         $formatter = new \NumberFormatter('es', \NumberFormatter::SPELLOUT);
         return strtoupper($formatter->format($numero)) . ' MIL PESOS mcte.';
     }
+
+    public function generarFacturacionEnBloque(Request $request)
+    {
+        $request->validate([
+            'empresa_id' => 'required|integer|exists:empresas,id',
+            'dias_pronto_pago' => 'required|integer|min:1',
+            'porcentaje_descuento' => 'required|numeric|min:0|max:100',
+        ]);
+    
+        $empresaId = $request->input('empresa_id');
+    
+        // Filtrar cuotas con concepto 'Cuota Administración' de la empresa seleccionada
+        $cuotas = CuotaPH::with(['concepto', 'unidades', 'empresa'])
+            ->whereHas('concepto', function ($query) {
+                $query->where('nombreConcepto', 'Cuota Administración');
+            })
+            ->whereHas('unidades', function ($query) use ($empresaId) {
+                $query->where('empresa_id', $empresaId);
+            })
+            ->get();
+    
+        // Obtener la razón social de la empresa para el nombre del archivo
+        $empresa = Empresa::find($empresaId);
+        $empresaName = $empresa ? $empresa->razon_social : 'empresa';
+    
+        // Inicializar un arreglo para guardar los PDFs generados
+        $facturas = [];
+    
+        foreach ($cuotas as $cuota) {
+            $empresa = $cuota->unidades->first()->empresa ?? null;
+    
+            if (!$empresa) continue;
+    
+            $total = $cuota->vrlIndividual;
+            $descuento = $total * ($request->input('porcentaje_descuento') / 100);
+            $totalConDescuento = $total - $descuento;
+    
+            $facturaData = [
+                'factura_id' => 'FS-' . now()->timestamp . '-' . $cuota->id,
+                'fecha_emision' => now()->format('d-M-Y'),
+                'fecha_vencimiento' => $cuota->hasta ?? now()->addDays(30)->format('d-M-Y'),
+                'empresa' => $empresa,
+                'cuotas' => [$cuota],
+                'total' => $total,
+                'valor_en_letras' => $this->convertirNumeroALetras($total),
+                'cuenta_bancaria' => $empresa->detalle->cuenta_banco ?? 'No disponible',
+                'correo_pago' => $empresa->detalle->correo_factura ?? 'No disponible',
+                'dias_pronto_pago' => $request->input('dias_pronto_pago'),
+                'porcentaje_descuento' => $request->input('porcentaje_descuento'),
+                'descuento' => $descuento,
+                'total_con_descuento' => $totalConDescuento,
+                'detalle_cuotas' => [
+                    [
+                        'aNombreDe' => $cuota->aNombreDe ?? 'N/A',
+                        'observacion' => $cuota->observacion ?? 'N/A',
+                        'tipoUnidad' => $cuota->unidades->first()->tipoUnidad ?? 'Sin tipo',
+                        'torreBloque' => $cuota->unidades->first()->torreBloque ?? 'Sin torre/bloque',
+                        'number' => $cuota->unidades->first()->number ?? 'Sin número'
+                    ]
+                ],
+                'logo' => $empresa->logo,
+            ];
+    
+            $pdf = Pdf::loadView('facturacion.copropiedades.factura_pdf', compact('facturaData'));
+    
+            // Crear un nombre único para cada archivo PDF utilizando tipoUnidad y number
+            $unidad = $cuota->unidades->first();
+            $nombreArchivo = "factura_{$unidad->tipoUnidad}_{$unidad->number}.pdf";
+            
+            $facturas[] = [
+                'pdf' => $pdf->output(),
+                'nombre' => $nombreArchivo,
+            ];
+        }
+    
+        // Devolver las facturas como un archivo comprimido ZIP
+        $zipFileName = 'facturas_bloque_' . str_replace(' ', '_', $empresaName) . '.zip';
+        $zipFile = storage_path('app/public/' . $zipFileName);
+        $zip = new \ZipArchive();
+        if ($zip->open($zipFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE)) {
+            foreach ($facturas as $factura) {
+                $zip->addFromString($factura['nombre'], $factura['pdf']);
+            }
+            $zip->close();
+        }
+    
+        return response()->download($zipFile)->deleteFileAfterSend();
+    }
+    
+    
+    
+
+    public function configurarFacturacionEnBloque($empresa_id = null)
+    {
+        $empresa = $empresa_id ? Empresa::find($empresa_id) : null;
+    
+        // Si se ha seleccionado una empresa, contar las cuotas de "Cuota Administración" asociadas
+        $totalFacturas = 0;
+        if ($empresa) {
+            $totalFacturas = CuotaPH::whereHas('concepto', function ($query) {
+                $query->where('nombreConcepto', 'Cuota Administración');
+            })
+            ->whereHas('unidades', function ($query) use ($empresa_id) {
+                $query->where('empresa_id', $empresa_id);
+            })
+            ->count(); // Contar el total de cuotas de administración
+        }
+    
+        // Pasar la empresa y el número total de facturas a la vista
+        return view('facturacion.copropiedades.factura_bloque', compact('empresa', 'totalFacturas'));
+    }
+    
+
 }

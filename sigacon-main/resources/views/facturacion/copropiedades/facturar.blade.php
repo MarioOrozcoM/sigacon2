@@ -79,6 +79,15 @@
                 <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Generar Factura</button>
             </div>
         </form>
+        <!-- Facturación en Bloque -->
+        <div class="text-center mt-6">
+            <a href="{{ route('facturas.bloque.configurar', ['empresa_id' => request('empresa_id')]) }}" 
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Facturación en Bloque
+            </a>
+        </div>
+
+
     @else
         <p class="text-center">Seleccione una empresa para ver las cuotas asignadas.</p>
     @endif

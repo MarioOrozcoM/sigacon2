@@ -201,6 +201,14 @@ Route::get('/cuotasPH/export', [CuotasPHController::class, 'export'])->name('cuo
 Route::get('/facturacion', [FacturaCopropiedadController::class, 'seleccionarEmpresa'])->name('facturas.seleccionar');
 Route::post('/facturacion/generar', [FacturaCopropiedadController::class, 'generarFactura'])->name('facturas.generar');
 
+// Muestra la vista para configurar la facturación en bloque
+Route::get('/facturacion/bloque/configurar/{empresa_id?}', [FacturaCopropiedadController::class, 'configurarFacturacionEnBloque'])
+    ->name('facturas.bloque.configurar');
+
+// Procesa y genera las facturas en bloque
+Route::post('/facturacion/bloque/generar', [FacturaCopropiedadController::class, 'generarFacturacionEnBloque'])
+    ->name('facturas.bloque.generar');
+
 
 //RUTAS CORREO COMPROBANTE Y N° CUENTA BANCARIA DE EMPRESA
 Route::get('/empresa-detalles', [EmpresaDetalleController::class, 'index'])->name('empresa_detalles.index');
