@@ -57,7 +57,7 @@
         }
         .footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 3rem;
         }
         .footer p {
             margin: 5px 0;
@@ -76,8 +76,8 @@
         <!-- Logo e información de la factura -->
         <div class="header">
             <div class="logo">
-                @if(!empty($empresa->logo))
-                    <img src="{{ public_path('images/' . basename($empresa->logo)) }}" alt="Logo de la empresa" style="max-width: 150px;">
+                @if(!empty($facturaData['logo']))
+                    <img src="{{ public_path('images/' . basename($facturaData['logo'])) }}" alt="Logo de la empresa" style="max-width: 150px;">
                 @else
                     <p>No se encontró el logo de la empresa.</p>
                 @endif
@@ -92,7 +92,7 @@
 
         <!-- Información de la unidad -->
         <div class="unidad-info">
-            <p><strong>Unidad:</strong> {{ $facturaData['detalle_cuotas'][0]['tipoUnidad'] }}  {{ $facturaData['detalle_cuotas'][0]['number'] }} - {{ $facturaData['detalle_cuotas'][0]['torreBloque'] ? 'Torre/Bloque ' . $facturaData['detalle_cuotas'][0]['torreBloque'] : '' }}</p>
+            <p><strong>Unidad:</strong> {{ $facturaData['detalle_cuotas'][0]['tipoUnidad'] }} {{ $facturaData['detalle_cuotas'][0]['number'] }} - {{ $facturaData['detalle_cuotas'][0]['torreBloque'] ? 'Torre/Bloque ' . $facturaData['detalle_cuotas'][0]['torreBloque'] : '' }}</p>
             <p><strong>A nombre de:</strong> {{ $facturaData['detalle_cuotas'][0]['aNombreDe'] }}</p>
             @if(count($facturaData['cuotas']) === 1)
                 <p><strong>Descripción:</strong> {{ $facturaData['detalle_cuotas'][0]['observacion'] }}</p>
@@ -122,6 +122,29 @@
                 </tr>
             </tfoot>
         </table>
+
+        <!-- Tabla para descuento pronto pago -->
+        @if($facturaData['dias_pronto_pago'] && $facturaData['porcentaje_descuento'])
+            <table class="table" style="margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th>Descuento Pronto Pago</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Descuento pronto pago ({{ $facturaData['dias_pronto_pago'] }} días, {{ $facturaData['porcentaje_descuento'] }}%)</td>
+                        <td>-${{ number_format($facturaData['descuento'], 3) }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total a pagar</strong></td>
+                        <td><strong>${{ number_format($facturaData['total_con_descuento'], 3) }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        @endif
+
 
         <!-- Total en letras, cuenta bancaria y soporte -->
         <p><strong>Total en letras:</strong> {{ $facturaData['valor_en_letras'] }}</p>

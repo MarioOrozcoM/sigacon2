@@ -65,6 +65,14 @@
                     @endforeach
                 </tbody>
             </table>
+                <!-- Descuento de pronto pago -->
+                <div class="mt-4 text-center">
+                    <label class="font-medium" for="dias_pronto_pago">Días para pronto pago:</label>
+                    <input type="number" id="dias_pronto_pago" name="dias_pronto_pago" class="border p-2 rounded" placeholder="Ej: 5" >
+
+                    <label class="font-medium" for="porcentaje_descuento">Porcentaje de descuento:</label>
+                    <input type="number" id="porcentaje_descuento" name="porcentaje_descuento" class="border p-2 rounded" placeholder="Ej: 10" >
+                </div>
 
             <!-- Botón para generar la factura -->
             <div class="text-center mt-4">
