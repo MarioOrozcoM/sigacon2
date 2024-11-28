@@ -124,19 +124,26 @@
         </table>
 
         <!-- Tabla para descuento pronto pago -->
-        @if($facturaData['dias_pronto_pago'] && $facturaData['porcentaje_descuento'])
+        @if($facturaData['dias_pronto_pago'])
             <table class="table" style="margin-top: 20px;">
                 <thead>
                     <tr>
-                        <th>Descuento Pronto Pago</th>
+                        <th>Otros Valores Informativos</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Descuento pronto pago ({{ $facturaData['dias_pronto_pago'] }} días, {{ $facturaData['porcentaje_descuento'] }}%)</td>
-                        <td>-${{ number_format($facturaData['descuento'], 3) }}</td>
-                    </tr>
+                    @if($facturaData['tipo_descuento'] === 'porcentaje')
+                        <tr>
+                            <td>Descuento pronto pago ({{ $facturaData['dias_pronto_pago'] }} días, {{ $facturaData['porcentaje_descuento'] }}%)</td>
+                            <td>-${{ number_format($facturaData['descuento'], 3) }}</td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td>Descuento pronto pago ({{ $facturaData['dias_pronto_pago'] }} días, valor fijo)</td>
+                            <td>-${{ number_format($facturaData['valor_descuento'], 3) }}</td>
+                        </tr>
+                    @endif
                     <tr>
                         <td><strong>Total a pagar</strong></td>
                         <td><strong>${{ number_format($facturaData['total_con_descuento'], 3) }}</strong></td>
@@ -145,9 +152,8 @@
             </table>
         @endif
 
-
         <!-- Total en letras, cuenta bancaria y soporte -->
-        <p><strong>Total en letras:</strong> {{ $facturaData['valor_en_letras'] }}</p>
+        <p><strong>Total a pagar en letras:</strong> {{ $facturaData['valor_en_letras'] }}</p>
         <p><strong>Consignar en:</strong> {{ $facturaData['cuenta_bancaria'] }}</p>
         <p><strong>Enviar soporte del pago al correo:</strong> {{ $facturaData['correo_pago'] }}</p>
 

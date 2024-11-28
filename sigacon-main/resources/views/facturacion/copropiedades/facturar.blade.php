@@ -65,29 +65,51 @@
                     @endforeach
                 </tbody>
             </table>
-                <!-- Descuento de pronto pago -->
-                <div class="mt-4 text-center">
-                    <label class="font-medium" for="dias_pronto_pago">Días para pronto pago:</label>
-                    <input type="number" id="dias_pronto_pago" name="dias_pronto_pago" class="border p-2 rounded" placeholder="Ej: 5" >
 
-                    <label class="font-medium" for="porcentaje_descuento">Porcentaje de descuento:</label>
-                    <input type="number" id="porcentaje_descuento" name="porcentaje_descuento" class="border p-2 rounded" placeholder="Ej: 10" >
+            <!-- Selección de descuento -->
+            <div class="mt-4 text-center">
+                <label class="font-medium block mb-2">Tipo de descuento:</label>
+                <div class="flex justify-center items-center gap-4">
+                    <label for="tipo_descuento_porcentaje" class="flex items-center">
+                        <input type="radio" id="tipo_descuento_porcentaje" name="tipo_descuento" value="porcentaje" class="mr-2" checked>
+                        Porcentaje (%)
+                    </label>
+                    <label for="tipo_descuento_valor" class="flex items-center">
+                        <input type="radio" id="tipo_descuento_valor" name="tipo_descuento" value="valor" class="mr-2">
+                        Valor Fijo ($)
+                    </label>
                 </div>
+            </div>
+
+            <!-- Campos de descuento -->
+            <div class="mt-4 text-center">
+                <label class="font-medium block mb-1" for="dias_pronto_pago">Días para pronto pago:</label>
+                <input type="number" id="dias_pronto_pago" name="dias_pronto_pago" class="border p-2 rounded w-1/3" placeholder="Ej: 5" >
+
+                <div id="campo_porcentaje" class="mt-4">
+                    <label class="font-medium block mb-1" for="porcentaje_descuento">Porcentaje de descuento:</label>
+                    <input type="number" id="porcentaje_descuento" name="porcentaje_descuento" class="border p-2 rounded w-1/3" placeholder="Ej: 10">
+                </div>
+
+                <div id="campo_valor" class="mt-4 hidden">
+                    <label class="font-medium block mb-1" for="valor_descuento">Valor del descuento:</label>
+                    <input type="number" id="valor_descuento" name="valor_descuento" class="border p-2 rounded w-1/3" placeholder="Ej: 5.000">
+                </div>
+            </div>
 
             <!-- Botón para generar la factura -->
             <div class="text-center mt-4">
                 <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Generar Factura</button>
             </div>
         </form>
+        
         <!-- Facturación en Bloque -->
-        <div class="text-center mt-6">
+        <div class="text-center mt-6 mb-4">
             <a href="{{ route('facturas.bloque.configurar', ['empresa_id' => request('empresa_id')]) }}" 
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Facturación en Bloque
             </a>
         </div>
-
-
     @else
         <p class="text-center">Seleccione una empresa para ver las cuotas asignadas.</p>
     @endif
@@ -96,5 +118,28 @@
     @include('includes.footer')
     <!-- Cierre Footer -->
 
+    <script>
+        // Mostrar u ocultar los campos de descuento según el tipo seleccionado
+        document.addEventListener('DOMContentLoaded', function () {
+            const tipoDescuentoPorcentaje = document.getElementById('tipo_descuento_porcentaje');
+            const tipoDescuentoValor = document.getElementById('tipo_descuento_valor');
+            const campoPorcentaje = document.getElementById('campo_porcentaje');
+            const campoValor = document.getElementById('campo_valor');
+
+            tipoDescuentoPorcentaje.addEventListener('change', function () {
+                if (this.checked) {
+                    campoPorcentaje.classList.remove('hidden');
+                    campoValor.classList.add('hidden');
+                }
+            });
+
+            tipoDescuentoValor.addEventListener('change', function () {
+                if (this.checked) {
+                    campoValor.classList.remove('hidden');
+                    campoPorcentaje.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
