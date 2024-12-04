@@ -98,7 +98,7 @@ class FacturaCopropiedadController extends Controller
         ];
     
         // Ajustar tamaño de la hoja dependiendo del contenido
-        $altura = 841.89 + (count($facturaData['cuotas']) - 10) * 20;
+        $altura = 841.89 + (count($facturaData['cuotas']) - 10) * 10;
         $pdf = Pdf::loadView('facturacion.copropiedades.factura_pdf', compact('facturaData', 'empresa'));
         $pdf->setPaper([0, 0, 595.28, $altura]);
     
